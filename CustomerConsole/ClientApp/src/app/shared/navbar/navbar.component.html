@@ -1,0 +1,425 @@
+
+
+  <!--  HEADER-AREA  -->
+  
+    <!-- <div class="header-area d-none">
+        <div class="container-xl">
+            <div class="row">
+                <div class="col-md-6 col-sm-5">
+                    <div class="user-menu">
+                        <ul class="list-unstyled list-inline">
+                            <li class="dropdown dropdown-small">
+                                <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="value">English </span><i class="fa fa-angle-down"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">English</a>
+                                    </li>
+                                    <li><a href="#">French</a>
+                                    </li>
+                                    <li><a href="#">German</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="dropdown dropdown-small">
+                                <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="value">USD </span><i class="fa fa-angle-down"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">USD</a>
+                                    </li>
+                                    <li><a href="#">INR</a>
+                                    </li>
+                                    <li><a href="#">GBP</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>Welcome to NLS Vector</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-7">
+                    <div class="header-right">
+                        <ul>
+                            <li [routerLink]="['/session/login']" *ngIf="!loggedIn"> 
+                                <a class="btn btn-link btn-sm">Login</a>
+                            </li>
+                            <li [routerLink]="['/session/register']" *ngIf="!loggedIn" >
+                                <a class="btn btn-link btn-sm">Register</a>
+                            </li>
+                            <li> 
+                                <a href="tel:1(888)739-8501" class="text-white" onclick="ga('send', 'event', 'Phone Click Tracking', 'Click to Call', '1(888)739-8501', 0);">
+                                    <mat-icon>phone</mat-icon> &nbsp; 1(888)739-8501
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- Header-area:END -->
+    <div class="logo_area">
+       
+            <div class="row align-items-center">
+                <div class="col-sm-3 col-md-3 col-xs-6">
+                    <div class="logo">
+                        <a [routerLink]="['/home/dashboard']">
+                            <h4 class="ml-3" *ngIf="SidebarSmallScreen">Vector</h4>
+                          <img src="/assets/nls-vector-logo_1583309893__29535.webp" width="180px" *ngIf="!SidebarSmallScreen"/>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-5 col-md-5 col-xs-12">
+                    <div class="header-search">
+                        <div class="d-flex align-items-center justify-content-center">
+                            <select name="category-search" id="resizing_select" class="browser-default top-select form-select">
+                                <option value="" selected="">All &nbsp;</option>
+                                    <option data-category-url="https://www.vector-nls.com/software/" value="29">Software &nbsp;</option>
+                                    <option data-category-url="https://www.vector-nls.com/hardware/" value="30">Hardware &nbsp;</option>
+                                    <option data-category-url="https://www.vector-nls.com/training/" value="28">Training &nbsp;</option>
+                                    <option data-category-url="https://www.vector-nls.com/counterfeit/" value="24">Counterfeit &nbsp;</option>
+                            </select>
+                            <select id="width_tmp_select">
+                                <option id="width_tmp_option"></option>
+                            </select>
+                            <div class="search-input-field">
+                                <input name="search_query_adv" data-search-quick="" class="search_" type="search" autocomplete="off" onfocus="this.placeholder=''" onblur="this.placeholder='Search'" placeholder="Search product">
+                                <button class="btn btn-secondary" name="go" value="Go">
+                                    <mat-icon>search</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="search-area">
+                        <form>
+                            <div class="control-group d-flex justify-content-start">
+
+                                <ul class="categories-filter animate-dropdown">
+                                    <li class="dropdown">
+
+                                        <a class="dropdown-toggle" data-toggle="dropdown">All Categories <b class="caret"></b></a>
+
+                                        <ul class="dropdown-menu" role="menu">
+
+                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Fashion</a>
+                                            </li>
+                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Watches</a>
+                                            </li>
+                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">House Wares</a>
+                                            </li>
+                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Desktop</a>
+                                            </li>
+                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Smartphones</a>
+                                            </li>
+
+
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <input class="search-field" placeholder="Search here..." />
+                                <a class="search-button"  (click)="onProductSearch()" type="button"> <mat-icon>search</mat-icon></a>
+                            </div>
+                        </form>
+                    </div> -->
+                </div>
+                <div class="col-sm-4 col-md-4 col-xs-6">
+                    <div class="logoarea-right">
+                        <ul>
+                            <li [routerLink]="['/session/login']" *ngIf="!loggedIn"> 
+                               <a class="btn btn-outline-primary btn-sm"> <mat-icon>subdirectory_arrow_right</mat-icon> &nbsp; Login</a>
+                            </li>
+                            <li [routerLink]="['/session/register']" *ngIf="!loggedIn" >
+                                <a class="btn btn-outline-success btn-sm"> <mat-icon>person_add</mat-icon> &nbsp; Register</a>
+                            </li>
+                            <li> 
+                                <a class="btn btn-outline-secondary btn-sm"  href="tel:1(888)739-8501" onclick="ga('send', 'event', 'Phone Click Tracking', 'Click to Call', '1(888)739-8501', 0);">
+                                    <mat-icon>phone</mat-icon> &nbsp; 1(888)739-8501
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+       
+    </div>
+    <!-- Logo-area -->
+    <!-- <div class="logo_area">
+        <div class="container-xl">
+            <div class="row">
+                <div class="col-sm-3 col-md-3 col-xs-6">
+                    <div class="logo">
+                        <a [routerLink]="['/home/dashboard']">
+                            <h4 class="ml-3" *ngIf="SidebarSmallScreen">Vector</h4>
+                          <img src="/assets/nls-vector-logo_1583309893__29535.webp" width="180px" *ngIf="!SidebarSmallScreen"/>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-xs-6">
+                    <div class="search-area">
+                        <form>
+                            <div class="control-group d-flex justify-content-start">
+
+                                <ul class="categories-filter animate-dropdown">
+                                    <li class="dropdown">
+
+                                        <a class="dropdown-toggle" data-toggle="dropdown">All Categories <b class="caret"></b></a>
+
+                                        <ul class="dropdown-menu" role="menu">
+
+                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Fashion</a>
+                                            </li>
+                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Watches</a>
+                                            </li>
+                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">House Wares</a>
+                                            </li>
+                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Desktop</a>
+                                            </li>
+                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Smartphones</a>
+                                            </li>
+
+
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <input class="search-field" placeholder="Search here..." />
+                                <a class="search-button"  (click)="onProductSearch()" type="button"> <mat-icon>search</mat-icon></a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-3 col-xs-none">
+                    <div class="bg-secondary p-2 d-flex align-items-center justify-content-center">
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- LOGO-AREA:END -->
+    
+    
+
+<!-- Header-AREA END -->
+
+
+<!-- <div id="topLine" class="text-center align-items-center fixed-top">
+    <div style="margin: auto;" *ngFor="let m of notificationMesg">
+      {{m.Message}}
+    </div>
+  </div> -->
+  
+  <div id="la-topnav" class="d-none">
+    <div class="container-xl">
+      <mat-icon class="menu_icon" *ngIf="SidebarSmallScreen" (click)="toggleOffSidebar()">menu</mat-icon>
+      <div class="la-brand pull-left" >
+          <a [routerLink]="['/home/dashboard']">
+              <h4 class="ml-3" *ngIf="SidebarSmallScreen">Vector NLS</h4>
+            <img src="/assets/nls-vector-logo_1583309893__29535.webp" width="180px" *ngIf="!SidebarSmallScreen"/>
+          </a>
+      </div>
+  
+      <div class="la_nav_item la-phone pull-left d-none d-sm-inline-block">
+          <a href="tel:1(888)739-8501" onclick="ga('send', 'event', 'Phone Click Tracking', 'Click to Call', '1(888)739-8501', 0);">
+              <mat-icon>phone</mat-icon> &nbsp; 1(888)739-8501
+          </a>
+      </div>
+  
+      <div class="la-search pulll-left d-none d-sm-inline-block">
+          <div class="input-group align-items-center">
+            <input type="text" class="form-control" placeholder="Search Products" [(ngModel)]="productSearchVal" type="search" placeholder="Search Products" (keyup)="onProductSearch()">
+            <div class="input-group-append">
+              <button class="btn btn-sm btn-light" (click)="onProductSearch()" type="button"> <mat-icon>search</mat-icon></button>
+            </div>
+          </div>
+      </div>
+      
+      <div class="la_nav_item la-cart pull-right position-relative" *ngIf="loggedIn">
+        <a class="cart" [routerLink]="['/home/cart']"><div class="pt-4"><mat-icon>shopping_cart</mat-icon></div></a>
+        <span class="badge badge-pill badge-danger cart-count">{{cartCount}}</span>
+      </div>
+  
+      <div class="la_nav_item la-account pull-right" *ngIf="loggedIn">
+        <div class="la-account-dropdown">
+            <a title="My Account" class="dropDownBut">
+                <mat-icon>person_pin</mat-icon>
+            </a>
+            <div class="la-account-dropdown-content">
+                <div style="text-align:left;">
+                    <h4 class="d-inline text-dark">Welcome</h4>
+                    <span style="display:inline-block;float:right;" (click)="logout();" ><a title="Logout" class="text-danger"><mat-icon>assignment_return</mat-icon> &nbsp;  Logout</a></span>
+                </div>
+                <div class="clearBoth"></div>
+                <hr class="mt-2">
+                <table class="w-100">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <a [routerLink]="['/orders']"><mat-icon>shopping_cart</mat-icon>
+                                    <ul>
+                                        <li>
+                                            Order Status
+                                        </li>
+                                    </ul>
+                                </a>
+                            </td>
+                            <td>
+                                <a [routerLink]="['/Profile']"><mat-icon>account_circle</mat-icon>
+                                    <ul>
+                                        <li>
+                                          Profile
+                                        </li>
+                                    </ul>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a [routerLink]="['/home/artwork']"><mat-icon>art_track</mat-icon>
+                                    <ul>
+                                        <li>
+                                            My Artworks
+                                        </li>
+                                    </ul>
+                                </a>
+                            </td>
+                            <td>
+                                <a [routerLink]="['/home/product']"><mat-icon>card_giftcard</mat-icon> 
+                                    <ul>
+                                        <li>
+                                          Products
+                                        </li>
+                                    </ul>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a [routerLink]="['/home/userprofile']">
+                                    <mat-icon>perm_contact_calendar</mat-icon>
+                                    <ul>
+                                        <li>
+                                          Profile
+                                        </li>
+                                    </ul>
+                                </a>
+                            </td>
+                            <td>
+                                <a [routerLink]="['/home/userprofile']">
+                                    <mat-icon>perm_contact_calendar</mat-icon>
+                                    <ul>
+                                        <li>
+                                            Manage Credit Cards
+                                        </li>
+                                    </ul>
+                                </a>
+                            </td>
+                        </tr>
+                        <!-- <tr>
+                            <td>
+                                <a [routerLink]="['/home/userprofile']">
+                                    <mat-icon>perm_contact_calendar</mat-icon>
+                                    <ul>
+                                        <li>
+                                            Pending Payment
+                                        </li>
+                                    </ul>
+                                </a>
+                            </td>
+                            <td>
+                                <a [routerLink]="['/home/userprofile']">
+                                    <mat-icon>perm_contact_calendar</mat-icon>
+                                    <ul>
+                                        <li>
+                                            Messages (977)
+                                        </li>
+                                    </ul>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a [routerLink]="['/home/userprofile']">
+                                    <mat-icon>perm_contact_calendar</mat-icon>
+                                    <ul>
+                                        <li>
+                                            Favorite (0)
+                                        </li>
+                                    </ul>
+                                </a>
+                            </td>
+                            <td>
+                                <a [routerLink]="['/home/userprofile']">
+                                    <mat-icon>perm_contact_calendar</mat-icon>
+                                    <ul>
+                                        <li>
+                                            Address Book
+                                        </li>
+                                    </ul>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a [routerLink]="['/home/userprofile']">
+                                    <mat-icon>perm_contact_calendar</mat-icon>
+                                    <ul>
+                                        <li>
+                                            Estimate
+                                        </li>
+                                    </ul>
+                                </a>
+                            </td>
+                            <td>
+                                <a [routerLink]="['/home/userprofile']">
+                                    <mat-icon>perm_contact_calendar</mat-icon>
+                                    <ul>
+                                        <li>
+                                            Claims
+                                        </li>
+                                    </ul>
+                                </a>
+                            </td>
+                        </tr> -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+      </div>
+      <div class="la_nav_item la-cart searchbar pull-right d-inline-block d-sm-none">
+          <a class="cart" (click)="toggleSearchBar()"><div class="pt-4"><mat-icon>search</mat-icon></div></a>
+          <div class="togglesearch" *ngIf="isShownSearch">
+            <div class="input-group align-items-center">
+              <input type="text" class="form-control" placeholder="Search Products" [(ngModel)]="productSearchVal" type="search" placeholder="Search Products" (keyup)="onProductSearch()">
+              <div class="input-group-append">
+                <button class="btn btn-sm btn-outline-secondary" (click)="onProductSearch()" type="button"> <mat-icon>search</mat-icon></button>
+              </div>
+            </div>
+          </div>
+      </div>
+      <div class="la_nav_item la-orders pull-right d-none d-sm-inline-block" [routerLink]="['/orders']" *ngIf="loggedIn">
+           <a title="Orders">Orders</a>
+      </div>
+  
+      <div class="la_nav_item la-favorite pull-right d-none d-sm-inline-block" [routerLink]="['/home/artwork']"  *ngIf="loggedIn">
+          <a title="Favorite">
+            <mat-icon>stars</mat-icon>
+          </a>
+      </div>
+  
+      <div class="la_nav_item la-upload pull-right d-none d-sm-inline-block"  [routerLink]="['/home/artwork']"  *ngIf="loggedIn">
+          <a title="Upload">Upload</a>
+      </div>
+  
+      <div class="la_nav_item la-estimate pull-right d-none d-sm-inline-block" [routerLink]="['/home/estimate']" *ngIf="loggedIn">
+          <a title="Estimate">Estimate</a>
+      </div>
+      <div class="la_nav_item la-artwork pull-right d-none d-sm-inline-block" [routerLink]="['/home/artwork']" *ngIf="loggedIn">
+          <a title="My Artworks">My Artworks</a>
+      </div>
+  
+      <div class="la-search pull-right d-none d-sm-flex" [routerLink]="['/session/login']" *ngIf="!loggedIn">
+          <a class="btn btn-primary btn-sm">Login</a>
+      </div>
+      <div class="la-search pull-right d-none d-sm-flex" [routerLink]="['/session/register']" *ngIf="!loggedIn">
+          <a class="btn btn-success btn-sm">Register</a>
+      </div>
+   </div>
+  </div>

@@ -1,0 +1,6 @@
+<mat-form-field class="full-wid" [class]="config.styleClass">
+    <mat-label>{{config.label}}</mat-label>
+    <mat-select (selectionChange)="onChange(config.fieldValue)" [(ngModel)]="config.fieldValue">
+        <mat-option *ngFor="let option of config.options" [value]="option.value"  [attr.selected]="option.value==config.fieldValue">{{option.label}}</mat-option>
+     </mat-select>                            
+ </mat-form-field>

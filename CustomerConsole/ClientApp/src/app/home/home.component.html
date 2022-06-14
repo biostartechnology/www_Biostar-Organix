@@ -1,0 +1,12 @@
+<div class="app h-100">
+    <div class="page-nav">
+      <app-navbar></app-navbar>
+    </div>
+    <app-sidebar (onchange)="onCategoryChange($event)"></app-sidebar>
+      <div class="body-content">
+          <div class="main_content">
+            <router-outlet></router-outlet>
+            <app-footer></app-footer>
+          </div>
+      </div>
+</div>

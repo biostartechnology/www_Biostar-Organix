@@ -1,0 +1,25 @@
+
+<div class="mk_productPage">
+  <div class="mk_page_cont" *ngIf="displayList && displayList.length > 0">
+    <div class="w-100 col-md-12 ml-5">
+      <h4 class="page_header mt-5 pb-3">Indoor Outdoor Displays</h4>
+      <div *ngFor="let cat of displayList" class="mk_view row col-md-4" >
+        <div class="product-card"(click)="onCategoryChange(product)">
+          <div class="prod-info justify-content-center">
+            <div class="img ">
+              <img *ngIf="cat.image" class="prod_img w-100" [src]="sanitize(cat.image)"
+                   onerror="this.src='./assets/img/noImg_placeholder.jpeg';this.onerror='';" alt="">
+            </div>
+          </div>
+          <div class="prod-title text-center">
+            <a (click)="onCategoryChange(product)"> {{cat.name}} </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

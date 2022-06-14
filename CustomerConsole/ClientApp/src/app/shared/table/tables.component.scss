@@ -1,0 +1,101 @@
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #000;
+}
+
+img.img-circle.ng-star-inserted {
+  border-radius: 25px;
+  width: 30px;
+  height: 30px;
+}
+
+
+span.refreshicon i {
+  margin-left: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  color: #7d7d7d;
+}
+
+span.refreshicon i:hover {
+  color: black;
+}
+
+section#small-table {
+  overflow-x: hidden;
+}
+
+.btn-secondary {
+  background-color: #bcbaba;
+}
+
+
+
+
+
+table {
+  width: 100%;
+  table-layout: fixed;
+}
+thead {
+  background-color: #434a54;
+}
+
+.tbody {
+  height: 300px;
+  overflow-x: auto;
+  margin-top: 0px;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+th {
+  padding: 16px 15px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 12px;
+  color: #fff;
+  text-transform: uppercase;
+}
+tr.selected {
+  background-color: #e6e9ed;
+}
+td {
+  padding: 15px;
+  text-align: left;
+  vertical-align: middle;
+  font-weight: 300;
+  font-size: 12px;
+  border-bottom: solid 1px #e6e9ed;
+}
+
+/* for custom scrollbar for webkit browser*/
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+.grid_view {
+  flex-flow: row wrap;
+  box-sizing: border-box;
+  display: flex;
+  place-content: stretch flex-start;
+  align-items: stretch;
+  max-height: 100%;
+
+  .grid_item {
+    flex: 1 1 33.333%;
+    box-sizing: border-box;
+    max-width: 33.333%;
+    background-color: #fff;
+  }
+}

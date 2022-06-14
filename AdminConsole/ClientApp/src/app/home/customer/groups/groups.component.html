@@ -1,0 +1,35 @@
+<div class="width-100 d-flex flex-column">
+    <app-table *ngIf="!groupDetailsView" (onAnyAction)="onAnyAction($event)" (addClick)="addMessageClick($event)" (deleteClick)="deleteMessageClicked($event)" (reloadData)="getDatFromServer($event)" [config]="MessageTableConfig"></app-table>
+  
+    <div class="content-box"  *ngIf="groupDetailsView">
+      <div id="basicInfo" class="mat-card">
+        <div class="gene-card-title">
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <h4>{{'Messages'}}</h4>
+          </div>
+        </div>
+        <div class="gene-card-content">
+          <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+            <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100">
+              <app-input *ngFor="let f of groupsField" [config]="f"></app-input>
+            </div>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <h5>{{'Allowed Category'}}</h5>
+        </div>
+        <div class="gene-card-content">
+          <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+              <app-product-categories [multiSelect]="true" [(selectedCategory)]="selectedCatId" [(selectedCatName)]="selectedCatName"></app-product-categories>
+            </div>
+          </div>
+        </div>
+        <div class="action-bar">
+          <button type="button" class="btn btn-danger mr-2 float-right" (click)="CancelClicked()">Cancel</button>
+          <button type="button" class="btn btn-primary mr-2 float-right" (click)="CreateClicked()">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

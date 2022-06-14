@@ -1,0 +1,65 @@
+<div class="row bg-light p-1">
+  <div class="col-lg-5 col-sm-12 d-flex align-items-center">
+    <span>Job: {{config.JobName}}</span>
+    <button class="btn text-info btn-sm">Change</button>
+  </div>
+  <div class="col-lg-2 col-sm-12"><b>Product Name</b></div>
+  <div class="col-lg-5 col-sm-12 d-flex justify-content-end">
+    <!--<button class="btn text-info btn-sm" (click)="onaction('fav')">
+      <mat-icon class="mr-1">favorite</mat-icon> <span>Favorite</span>
+    </button>-->
+    <button class="btn text-success btn-sm mx-1" (click)="onaction('savelater')">
+      <mat-icon class="mr-1">save</mat-icon> <span>Save for later</span>
+    </button>
+    <button class="btn text-danger btn-sm" (click)="onaction('delete')">
+      <mat-icon class="mr-1">clear</mat-icon> <span>Delete</span>
+    </button>
+  </div>
+</div>
+<div class="row modal-body">
+  <div class="col-sm-12 col-lg-5">
+    <ul class="list-group">
+      <li class="list-group-item"><b>Size : </b>{{config.Width}}' x {{config.Height}}'</li>
+      <li class="list-group-item"><b># of Sides : </b> {{config.NoOfSides}} </li>
+      <li class="list-group-item"><b>Turnaround : </b>	 {{config.TurnAround}} </li>
+      <li class="list-group-item"><b>Material : </b> {{config.ProductTitle}}</li>
+      <li class="list-group-item"><b>Hem : </b>	{{config.Hem}}</li>
+      <li class="list-group-item"><b>Grommet : </b>{{config.Grommet}}</li>
+    </ul>
+  </div>
+  <div class="col-lg-2 col-sm-12 d-flex align-items-baseline">
+    <span>Store Pickup</span>  <button class="btn text-info btn-sm">Change</button>
+  </div>
+  <div class="col-lg-5 col-sm-12 d-flex align-items-end flex-column">
+    <table class="table table-bordered" cellspacing="0" cellpadding="3" align="right">
+      <tbody>
+        <tr>
+          <th>Qty.</th>
+          <th>Unit Price</th>
+          <th>Sub-Total</th>
+        </tr>
+        <tr>
+          <td align="center">
+            <input type="number" class="form-control" (change)="onaction('ordercount')" [(ngModel)]="config.OrderCount">
+          </td>
+          <td align="center">${{config.UnitPrice}}</td>
+          <td align="right" class="price">${{config.UnitPrice * config.OrderCount}}</td>
+        </tr>
+        <tr>
+          <td colspan="2" style="text-align: right;">Shipping</td>
+          <td align="right" class="price">
+            ${{config.ShippingCost}}
+          </td>
+        <tr>
+          <td colspan="2" style="text-align: right;">Job-Total</td>
+          <td align="right" class="price">
+            ${{(config.UnitPrice * config.OrderCount) + config.ShippingCost}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!--<button class="btn btn-outline-secondary btn-sm mt-2">
+      <mat-icon class="mr-1">content_copy</mat-icon> <span>Duplicate this job</span>
+    </button>-->
+  </div>
+</div>

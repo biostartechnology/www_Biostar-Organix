@@ -1,0 +1,37 @@
+
+  <div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+      <div class="content-wrapper d-flex align-items-center auth login-full-bg">
+        <div class="row w-100">
+          <div class="col-lg-8 mx-auto">
+            <div class="auth-form-dark text-left p-5" [class.d-none]="step!=1">
+              <h2>Recover Password</h2>
+              <h6 class="font-weight-light">Please enter your email address and we'll send you instructions on how to reset your password.</h6>
+              <form class="pt-5">
+                <div *ngFor="let field of forgotPassword" class="form-group">
+                  <div [class]="field.styleClass">
+                    <label for="exampleInputEmail1">{{field.label}}</label>
+                    <input [type]="field.type" [name]="field.fieldId" [(ngModel)]="field.fieldValue" class="form-control" [placeholder]="" [required]="field.required">
+                    <i class="mdi mdi-account"></i>
+                    <p *ngIf="!field.isValid" class="help-block mt-1 text-warning"><i class="fa fa-exclamation-circle align-middle"></i>{{field.errorMesg}}</p>
+                    <p *ngIf="errorMesg" class="help-block mt-1 text-warning"><i class="fa fa-exclamation-circle align-middle"></i>{{errorMesg}}</p>
+                  </div>
+                </div>
+                <div class="mt-5">
+                  <button (click)="onSubmit()" class="btn btn-block btn-primary btn-md font-weight-medium" [class.disabled]="showLoading">Recover <div [class.hidden]="!showLoading" class="lds-ring"><div></div><div></div><div></div><div></div></div></button>
+                  </div>
+                <div class="mt-3 text-center">
+                  <a href='https://tickets.nlshelp.com/session/login' class="auth-link text-white">Back To Login</a>
+                </div>
+              </form>
+            </div>
+            <div class="auth-form-dark text-left p-5" [class.d-none]="step!=2">
+              <p class="card-text mb-3">Password reset instructions is sent to your Email Address.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- content-wrapper ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>

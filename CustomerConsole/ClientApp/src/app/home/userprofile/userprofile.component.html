@@ -1,0 +1,42 @@
+
+<section class="addModel mt-3">
+  <button type="button" class="btn mr-2 btn-danger" (click)="cancelClicked()">
+    <span class="d-flex align-items-center">
+      <i class="ft-x mr-1"></i>
+      <span>Cancel</span>
+    </span>
+  </button>
+      <div class="card col-sm-6 col-lg-8 m-auto p-0">
+        <div class="card-header">
+          <h4 class="card-title">Edit Profile</h4>
+        </div>
+        <div class="card-content">
+          <div class="card-body">
+            <div class="row w-100 justify-content-center">
+              <div class="product-image-gallery-item add-icon">
+                <a (click)="triggerFileClick()" class="p-link" href="javascript:void(0)">
+                  <img [src]="profilePic" alt="" height="100" style="width:auto">
+                </a>
+              </div>
+            </div>
+            <input #fileToUpload (change)="onFileUploaded($event)" type="file" accept="image/*" style="display:none;" />
+            <div *ngFor="let field of UsersDetails" class="w-100">
+              <div class="col-md-12" [class]="field.styleClass">
+                <div class="form-group row">
+                  <label class="col-md-12">{{field.label}}</label>
+                  <div class="col-md-12">
+                    <input [type]="field.type" [name]="field.fieldId" [(ngModel)]="field.fieldValue" class="form-control" [placeholder]="" [required]="field.required" />
+                    <div *ngIf="!field.isValid"
+                         class="help-block mt-1 text-danger"><i class="ft-alert-circle align-middle">{{field.errorMesg}}</i></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer taskboard-modal-footer">
+            <button (click)="onSaveClicked()" class="btn btn-primary btn-save"><i class="ft-check-square mr-1"></i>  Save </button>
+          </div>
+        </div>
+      </div>
+  
+</section>

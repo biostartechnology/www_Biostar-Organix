@@ -1,0 +1,60 @@
+<div id="main-app" class="app sidebar-color-dark header-color-dark side-panel-opened  h-100 w-100"  [class.collapsed-sidebar]="sidenavOpen == false">
+  <mat-sidenav-container class="mat-drawer-container mat-sidenav-container gene-container mat-drawer-transition">
+    <mat-sidenav #sidenav opened mode="side" class="mat-drawer mat-sidenav sidebar-area ng-tns-c164-0 ng-trigger ng-trigger-transform mat-drawer-side  mat-drawer-opened" style="transform: none; visibility: visible;">
+      <app-sidenav></app-sidenav>
+    </mat-sidenav>
+    <mat-toolbar class="gene-header-toolbar mb-4">
+      <div class="gene-ham-icon" tourAnchor="start.tour">
+        <button class="btn btn-sm" (click)="toggleSidebar()"> <mat-icon>menu</mat-icon></button>
+      </div>
+      <a class="navbar-brand" href="#">{{header}}</a>
+
+    </mat-toolbar>
+
+    <div class="gene-base-container">
+      <router-outlet></router-outlet>
+    </div>
+
+
+    <!-- <mat-sidenav #end position="end" class="chat-panel" mode="over" opened="false">
+        <div class="scroll">
+            <mat-toolbar class="primary-bg">
+                <h3>{{'Notifications'}}</h3>
+            </mat-toolbar>
+            <mat-nav-list>
+                <mat-list-item>
+                    <mat-icon mat-list-avatar class="primary-text">person_add</mat-icon>
+                    <h4 mat-line>New User</h4>
+                    <p mat-line>10 New Users Registered</p>
+                </mat-list-item>
+                <mat-list-item>
+                    <mat-icon mat-list-avatar class="primary-text">system_update</mat-icon>
+                    <h4 mat-line>Updates</h4>
+                    <p mat-line>New Updates are available for Server</p>
+                </mat-list-item>
+                <mat-list-item>
+                    <mat-icon mat-list-avatar class="primary-text">info</mat-icon>
+                    <h4 mat-line>Backup</h4>
+                    <p mat-line>Backup task is completed</p>
+                </mat-list-item>
+                <mat-list-item>
+                    <mat-icon mat-list-avatar class="primary-text">delete_sweep</mat-icon>
+                    <h4 mat-line>Junk Files are deleted</h4>
+                </mat-list-item>
+                <mat-list-item>
+                    <mat-icon mat-list-avatar class="primary-text">check_circle</mat-icon>
+                    <h4 mat-line>2 New project Completed</h4>
+                </mat-list-item>
+                <mat-list-item>
+                    <mat-icon mat-list-avatar class="warn-text">notifications_paused</mat-icon>
+                    <h4 mat-line>Need 4 Data Entry Operator</h4>
+                </mat-list-item>
+                <mat-list-item>
+                    <mat-icon mat-list-avatar class="warn-text">error</mat-icon>
+                    <h4 mat-line>Server 2 is down for 1 hour</h4>
+                </mat-list-item>
+            </mat-nav-list>
+        </div>
+    </mat-sidenav> -->
+  </mat-sidenav-container>
+</div>

@@ -1,0 +1,67 @@
+
+<div class="container h-100 mt-5">
+  <div class="row justify-content-center h-100 align-items-center" *ngIf="step == 1">
+          <div class="authincation-content p-2 w-100">
+            <div class="text-center m-2">
+              <h3>Create Account</h3>
+            </div>
+            <div class="row">
+              <div class="col-xl-6">
+                <div class="auth-form">
+                  <h4 class="text-center mb-4 text-white">Trade Account Information</h4>
+                  <div *ngFor="let field of signUpDetails_1" class="w-100">
+                    <div class="col-md-12" [class]="field.styleClass">
+                      <div class="form-group row">
+                        <label class="col-md-12">{{field.label}}</label>
+                        <div class="col-md-12">
+                          <input [type]="field.type" [name]="field.fieldId" [(ngModel)]="field.fieldValue" class="form-control" [placeholder]="" [required]="field.required">
+                          <div *ngIf="!field.isValid"
+                               class="help-block mt-1 text-danger"><i class="ft-alert-circle align-middle">{{field.errorMesg}}</i></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="checkbox auth-checkbox d-flex align-items-center">
+                    <input type="checkbox" [(ngModel)]="subscribeCheck" id="auth-login" width="20" height="20" class="pr-2">
+                    <span for="auth-login" class="pl-1"><a class="font-small-2 mb-3 font-weight-normal accept-terms-a " [class.text-danger]="(registerForm2Submitted && !eulaCheck)"> I would like to receive website email newsletters.</a></span>
+                  </div>
+                  <div [hidden]="signUpError ==''">
+                    <p>{{signUpError}}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-6">
+                <div class="auth-form">
+                  <h4 class="text-center mb-4 text-white">Billing Information</h4>
+                  <div *ngFor="let field of signUpDetails_2" class="w-100">
+                    <div class="col-md-12" [class]="field.styleClass">
+                      <div class="form-group row">
+                        <label class="col-md-12">{{field.label}}</label>
+                        <div class="col-md-12">
+                          <input [type]="field.type" [name]="field.fieldId" [(ngModel)]="field.fieldValue" class="form-control" [placeholder]="" [required]="field.required">
+                          <div *ngIf="!field.isValid"
+                               class="help-block mt-1 text-danger"><i class="ft-alert-circle align-middle">{{field.errorMesg}}</i></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="checkbox auth-checkbox d-flex align-items-center">
+                    <input type="checkbox" [(ngModel)]="eulaCheck" id="auth-login" width="20" height="20" class="pr-2">
+                    <span for="auth-login" class="pl-1"><a class="font-small-2 mb-3 font-weight-normal accept-terms-a " [class.text-danger]="(registerForm2Submitted && !eulaCheck)">I have read & accept the Terms & Conditions</a></span>
+                  </div>
+                  <div class="float-right mt-2">
+                    <button type="submit" class="btn btn-dark" (click)="onSubmit()" [class.disabled]="showLoading">Register <div class="lds-ring" [class.hidden]="!showLoading"></div></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+    <div class="row justify-content-center h-100 align-items-center" *ngIf="step == -1">
+      <div class="help-block mt-1 text-danger"><i class="ft-alert-circle align-middle">{{signUpError}}</i></div>
+     
+    </div>
+    <div class="row justify-content-center h-100 align-items-center" *ngIf="step == 3">
+      <div class="help-block mt-1 text-info"><i class="ft-circle-check align-middle">Verification mail sent to your register email address <b> {{emailAddress}} </b>. Please verify email address to login.</i></div>
+    </div>
+  </div>

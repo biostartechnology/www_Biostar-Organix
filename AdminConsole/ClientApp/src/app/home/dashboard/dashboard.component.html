@@ -1,0 +1,25 @@
+<div fxLayout="row wrap" fxLayoutAlign="start stretch" class="crm-stats-cards" *ngIf="statsCards">
+    <div class="crm-stats" fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+       <div fxLayout="row wrap" fxLayoutAlign="start start">
+          <div fxFlex.gt-md="25" fxFlex.gt-sm="50" fxFlex.gt-xs="100" fxFlex="100" *ngFor="let cards of statsCards">
+             <mat-card class="{{cards.card_color}} mat-card">
+                <div class="mrgn-b-xs" mat-card-widget fxLayout="row" fxLayoutAlign="start center">
+                   <span class="inline-block lead">
+                      <i class="fa {{cards.icon}} mrgn-r-xs" aria-hidden="true"></i>
+                   </span>
+                   <span class="lead inline-block">{{cards.title}}</span>
+                </div>
+               
+                <div class="chart-wrap">
+                   <!-- <ms-stats-line-chart [label]="cards.chartLabel" [data]="cards.chartData" [color]="cards.chartColors"></ms-stats-line-chart> -->
+                </div>
+                <div class="mrgn-b-md" fxLayout="row wrap" fxLayoutAlign="space-between center">
+                   <span>{{cards.viewer}}</span>
+                   <span>Trade : {{cards.trade}}%</span>
+                </div>
+             </mat-card>
+          </div>
+       </div>
+    </div>
+    <!--Crm stats cards -->
+ </div>

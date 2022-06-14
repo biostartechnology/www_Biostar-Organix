@@ -1,0 +1,26 @@
+
+<div class="mk_productPage">
+  <div class="mk_page_cont" *ngIf="!productDetailedView" >
+    <div class="w-100" *ngIf="selectedCategory != null || productSearchVal">
+      <app-subcategory *ngIf="isSubcatView" [ProductList]="productsList.data" (onclick)="showDetails($event)"></app-subcategory>
+      <app-grid-view *ngIf="productsList.data && productsList.data.length > 0 && !isSubcatView" [config]="productsList" (onclick)="showDetails($event)"> </app-grid-view>
+      <div *ngIf="!loadingData && (!productsList.data || productsList.data.length == 0)" class="w-100 h-100 p-2 m-2 d-flex align-items-center justify-content-center flex-column">
+        <h1><mat-icon class="text-info m-2" style="font-size: 5rem;">hourglass_empty</mat-icon></h1>
+        <h2> No Products found for this category<span class="text-info"> :( </span></h2>
+      </div>
+      <div *ngIf="loadingData" class="w-100 h-100 p-2 m-2 d-flex align-items-center justify-content-center flex-column">
+       <h2>Loading...</h2>
+      </div>
+    </div>
+  </div>
+  <div class="mk_page_cont" *ngIf="productDetailedView">
+    <button type="button" value="Back" class="mk_backbtn btn btn-secondary pt-1 px-2 pb-0" (click)="backClicked()">
+      <mat-icon>keyboard_backspace</mat-icon>
+    </button>
+    <app-productdetails [product]="selectedProduct"> </app-productdetails>
+  </div>
+</div>
+
+
+
+

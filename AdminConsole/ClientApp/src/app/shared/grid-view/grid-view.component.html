@@ -1,0 +1,28 @@
+
+<div class="d-flex">
+  <h5>{{config.productTitle}}</h5>
+</div>
+<div class="grid_view">
+  <div class="product-card" *ngFor="let product of config.data; let i=index;" [ngClass]="config.cssClass">
+    <div class="prod-info">
+      <div class="title">
+        {{product.productName}}
+      </div>
+      <div class="info">
+        <ul>
+          <li *ngFor="let info of product.productInfo; let i=index;"> {{info}}</li>
+        </ul>
+      </div>
+      <div class="link">
+        <ul>
+          <li *ngFor="let link of product.link; let i=index;"><a [routerLink]="['/home/proddetails']">{{link}}</a> </li>
+        </ul>
+
+      </div>
+    </div>
+    <div class="prod-img">
+      <img width="135" height="130" class="prod_img" [src]="product.productImg"
+           onerror="this.src='./assets/img/noImg_placeholder.jpeg';this.onerror='';" alt="">
+    </div>
+  </div>
+</div>

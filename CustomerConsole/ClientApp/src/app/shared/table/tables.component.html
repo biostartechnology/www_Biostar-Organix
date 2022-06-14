@@ -1,0 +1,91 @@
+<section id="small-table">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">{{config.tableHeader}}</h4>
+            <div class="card_tools">
+              <div class="d-flex justify-content-start flex-grow-1" *ngIf="config.showToolBar">
+                <button type="button" class="btn mr-2 btn-primary" (click)="addClick()">
+                  <span class="d-flex align-items-center">
+                    <i class="ft-plus mr-1"></i>
+                    <span>Add</span>
+                  </span>
+                </button>
+                <button type="button" class="btn mr-2 btn-secondary" (click)="editClick()">
+                  <span class="d-flex align-items-center">
+                    <i class="ft-edit-2 mr-1"></i>
+                    <span>Edit</span>
+                  </span>
+                </button>
+                <button type="button" class="btn mr-2 btn-danger" (click)="deleteClick()">
+                  <span class="d-flex align-items-center">
+                    <i class="ft-trash mr-1"></i>
+                    <span>Delete</span>
+                  </span>
+                </button>
+              </div>
+              <div class="d-flex justify-content-end flex-shrink-0">
+                <input class="form-control ml-2"  type="text" placeholder="Search" name="searchTerm" [(ngModel)]="searchTerm" />
+                <span (click)="onPageChange(currentPage)" class="d-flex align-items-center refreshicon">
+                  <mat-icon>refresh</mat-icon>
+                </span>
+              </div>
+            </div>
+          </div>
+         
+          <div class="card-content">
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table m-0 table-borderd">
+                  <thead class="p-1">
+                    <tr>
+                      <th *ngFor="let columnHeader of config.columns" [ngClass]="columnHeader.sortDirection == 'asc' ? 'sort-asc-icn' : 'sort-desc-icn'" [class.ascdesc-sort-icn]="!columnHeader.sortDirection" (click)="onSort(columnHeader)">
+                        {{columnHeader.name}}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody [class.d-none]="noSearchResult" *ngIf="config.data">
+                    <tr *ngFor="let row of config.data.rows; let i = index" [class]="row.onSearchClass" [class.selected]="selectedRowId == i" (click)="selectRow(i,row)">
+                      <td *ngFor="let columnHeader of config.columns" [ngSwitch]="columnHeader.type">
+                        <span *ngSwitchCase="'string'">{{row[columnHeader.id]}}</span>
+                        <a href=""  *ngSwitchCase="'link'">{{row[columnHeader.id]}}</a>
+                        <span *ngSwitchCase="'Date'">{{getDateFormatted(row[columnHeader.id])}}</span>
+                        <img *ngSwitchCase="'image'" class="img-circle" src="{{row[columnHeader.id]}}" onerror="this.src='/assets/images/noImg_placeholder.jpg';this.onerror='';" height="50"
+                             width="50">
+                        <div *ngSwitchCase="'select'">
+                          <span *ngFor="let option of columnHeader.options" ><span *ngIf="option.value == row[columnHeader.id]">{{option.label}}</span></span>
+                        </div>
+                        <button *ngSwitchCase="'button'" type="button" class="btn mr-2 btn-light" (click)="buttonClick(columnHeader.name,row)">
+                          <span class="d-flex align-items-center">
+                            <i [ngClass]="columnHeader.icon" class="mr-1"></i>
+                            <span>{{columnHeader.name}}</span>
+                          </span>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div [class.d-none]="!noSearchResult" class="text-center p-4">
+                  No Result Found
+                </div>
+              </div>
+              <div class="d-flex justify-content-between p-2" *ngIf="config.data">
+                <ngb-pagination [collectionSize]="config.data.totalRows"  (pageChange)="onPageChange($event)" [pageSize]="config.currentPageSize" [(page)]="currentPage" [boundaryLinks]="true"></ngb-pagination>
+                <select class="custom-select" (change)="onPageChange(currentPage)" style="width: auto" name="pageSize" [(ngModel)]="config.currentPageSize">
+                  <option [ngValue]="20">20</option>
+                  <option [ngValue]="50">50</option>
+                  <option [ngValue]="100">100</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<div class="grid_view">
+  <div class="grid_item"></div>
+</div>

@@ -1,0 +1,121 @@
+
+<div class="mk_prod_details row">
+  <div class="left_cont col-md-8 col-sm-12">
+    <section class="container">
+      <div class="showimg">
+        <div class="thumbnail-preview">
+          <img *ngIf="selectedImage.Path" [src]="sanitize(selectedImage.Path)" alt="images" (click)="openPopupZoomImg()" class="img-fluid img">
+        </div>
+        <ul class="thumb-img">
+          <li *ngFor="let img of product.ImagesUrls" (click)="imageSelected(img)">
+            <img [src]="sanitize(img.Path)" alt="thumbnail-img">
+          </li>
+        </ul>
+      </div>
+      <div class="hr-line"></div>
+    </section>
+    <section class="prod_details">
+      <h5 class="my-3">{{product.ProductName}}</h5>
+   
+      <mdb-tabs>
+        <mdb-tab title="Specs">
+            <p [innerHTML]="product.Specification | sanitizeHtml" class="pt-2">
+            </p>
+            <div class="buy-opt" *ngIf="product.VariantsDetails && product.VariantsDetails.length > 0">
+              <h6 class="tit">Buying Options</h6>
+              <div class="row m-0">
+                <div class="letter-style" *ngFor="let opt of product.VariantsDetails">
+                  <img *ngFor="let img of opt.ImageData" [src]="sanitize(img.Path)" alt="" width=100 />
+                  <p class="text-center">{{opt.VariantName}}</p>
+                </div>
+              </div>
+              <p style="font-size: 14px; width: 75%;">
+                {{product.VariantDescription}}
+              </p>
+            </div>
+            <div class="components" *ngIf="product.CustomAttributes && product.CustomAttributes.length > 0">
+              <h6 class="tit">Components</h6>
+              <div *ngFor="let custom of  product.CustomAttributes">
+                <a class="component-header" (click)="openOnClick(custom.Key)">{{custom.Name}}</a>
+                <div class="container mb-4" *ngIf="selectedComponent == custom.Key" id="trimCap">
+                  <div class="row m-0">
+                    <div class="col-md-10">
+                      <p style="font-size: 14px; width: 75%;" [innerHTML]="custom.Value | sanitizeHtml"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <img *ngFor="let img of custom.ImageData" [src]="sanitize(img.Path)" alt="" width=100 />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <a class="component-header" *ngIf="product.WarrantyInformation" (click)="openOnClick('warrenty')">Warranty+</a>
+              <div class="container" id="warrenty" *ngIf="selectedComponent=='warrenty'">
+                <div class="row m-0">
+                  <div class="col-md-12" [innerHTML]="product.WarrantyInformation | sanitizeHtml">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="faq" *ngIf="product.QuestionAns && product.QuestionAns.length > 0">
+              <h6 class="tit">Questions</h6>
+              <div *ngFor="let qa of product.QuestionAns;let i=index">
+                <a class="faq-header" (click)="openOnClick(i+'')"><b>Q :</b> {{qa.Question}}</a>
+                <div class="container mb-4 faq d-flex pl-3" id="answer1" *ngIf="selectedComponent==(i+'')">
+                  <b>A :</b> <span class="ml-1" [innerHTML]="qa.Answer | sanitizeHtml"></span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-10 p-0">
+              <p class="warning d-flex">
+                <b>WARNING :</b> <span class="ml-1" [innerHTML]="product.Warning | sanitizeHtml"></span>
+              </p>
+            </div>
+         
+        </mdb-tab>
+        <mdb-tab title="Videos" *ngIf="product.VideoLinks && product.VideoLinks.length > 0">
+            <youtube-player class="mt-2" *ngFor="let video of product.VideoLinks" [videoId]="video"
+                            (ready)="savePlayer($event)"
+                            (change)="onStateChange($event)"></youtube-player>
+          
+        </mdb-tab>
+      </mdb-tabs>
+      
+    </section>
+    <div>
+      <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':ImgPopupDisplayStyle}">
+        <div class="modal-dialog modal-xl" role="document">
+          <div class="modal-content zoomImg_popup">
+            <div class="modal-header">
+              <h4 class="modal-title">{{product.ProductName}}</h4>
+              <button type="button" class="btn btn-danger" (click)="closePopupZoomImg()"><mat-icon>clear</mat-icon></button>
+            </div>
+            <div class="modal-body">
+              <img  [src]="sanitize(selectedImage.Path)" alt="images" class="img-fluid img">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="right_cont col-md-4 col-sm-12">
+    <div class="p-3" *ngIf="!validSession">
+      <h5>
+        Register or Sign In
+        to see Prices!
+      </h5>
+      <!--<app-login></app-login>-->
+      <button class="btn btn-primary m-4" [routerLink]="['/session/login']">Login</button>
+      <br />
+      ------ OR -------
+      <br />
+      <button class="btn btn-success m-4" [routerLink]="['/session/register']">Register</button>
+      <p>
+        LASIGN IS A
+        TRADE-ONLY WEBSITE
+      </p>
+    </div>
+    <app-orderpage *ngIf="validSession" [selectedCategory]="_selectedCategory" [Product]="product" ></app-orderpage>
+  </div> 
+</div>

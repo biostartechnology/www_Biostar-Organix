@@ -1,0 +1,136 @@
+
+<div *ngIf="orderDetailsView">
+  <div fxLayout="row wrap" fxLayoutAlign="start center" fxflex="70" fxflex.xs="100" fxflex.sm="100" fxflex.md="50" fxflex.lg="70">
+    <button type="button" class="btn btn-primary mr-2" (click)="back()">Back</button>
+  </div>
+  <div>
+    <img [src]="sanitize(orderDetail.ProductImage)" width="100" />
+    <img [src]="sanitize(orderDetail.ArtWorkImgPath)" width="100" />
+    <p> Corner			: {{orderDetail.Corner			}}		</p>
+    <p> Customer Email	: {{orderDetail.CustomerEmail	}}		</p>
+    <p> Customer Name	: {{orderDetail.CustomerName	}}		</p>
+    <p> Customer Phone	: {{orderDetail.CustomerPhone	}}		</p>
+    <p> Delivery Type	: {{orderDetail.DeliveryType	}}		</p>
+    <p> Design Proof		: {{orderDetail.DesignProof		}}		</p>
+    <p> Grommet			: {{orderDetail.Grommet			}}		</p>
+    <p> Size (W*H)			: {{orderDetail.WidthFt}}' {{orderDetail.WidthInch}}" * {{orderDetail.HeightFt}}' * {{orderDetail.HeightInch}}"</p>
+    <p> Hem				: {{orderDetail.Hem				}}		</p>
+    <p> Id				: {{orderDetail.Id				}}		</p>
+    <p> Job Id			: {{orderDetail.JobId			}}		</p>
+    <p> Job Name			: {{orderDetail.JobName			}}		</p>
+    <p> No Of Sides		: {{orderDetail.NoOfSides		}}		</p>
+    <p> Notes			: {{orderDetail.Notes			}}		</p>
+    <p> Order Count		: {{orderDetail.OrderCount		}}		</p>
+    <p> Ordered Date		: {{orderDetail.OrderedDate		}}		</p>
+    <p> PayPal OrderId	: {{orderDetail.PayPalOrderId	}}		</p>
+    <p> Pick Up DateTime	: {{orderDetail.PickUpDateTime	}}		</p>
+    <p> Pole BannerSize	: {{orderDetail.PoleBannerSize	}}		</p>
+    <p> Pole Pocket		: {{orderDetail.PolePocket		}}		</p>
+    <p> Pole Width		: {{orderDetail.PoleWidth		}}		</p>
+    <p> Price			: {{orderDetail.Price			}}		</p>
+    <p> Product Id		: {{orderDetail.ProductId		}}		 <a (click)="navigateToProduct(orderDetail)" class="btn btn-sm btn-outline-secondary">Product Detail</a> </p>
+
+    <p> Product Name		: {{orderDetail.ProductName		}}		</p>
+    <p> Product Serial No	: {{orderDetail.ProductSerialNo	}}		</p>
+    <p> Product Title	: {{orderDetail.ProductTitle	}}		</p>
+    <p> Rope			: {{orderDetail.Rope			}}		</p>
+    <p> Shipping Address	: {{order.ShippingAddress	}}		</p>
+    <p> Unit Price		: ${{orderDetail.UnitPrice		}}		</p>
+    <p> Item Total Cost		: ${{orderDetail.TotalCost		}}		</p>
+    <p> Turn Around		: {{orderDetail.TurnAround		}}		</p>
+    <p> Webbing			: {{orderDetail.Webbing			}}		</p>
+    <p> Wind Slit		: {{orderDetail.Windslit		}}		</p>
+
+  </div>
+</div>
+<div class="page-content" *ngIf="!orderDetailsView">
+
+  <div class="m-4 p-2 order mat-card">
+    <div class="gene-card-title">
+      <div fxlayout="row" fxlayoutalign="start center">
+        <h4>Order Status</h4>
+      </div>
+      <mat-divider></mat-divider>
+    </div>
+    <table width="100%" class="table table-hover" cellspacing="0" cellpadding="10">
+      <tbody>
+        <tr class="tabband" style="background:#D4D4D4;">
+          <th width="200">Order#</th>
+          <th width="100">Job ID</th>
+          <th width="100">Preview</th>
+          <th width="50">Qty</th>
+          <th width="100"> Job Name/PO</th>
+          <th width="100">Status</th>
+          <th width="100">Refund Status</th>
+          <th width="100">Art Image</th>
+          <th width="100">Action</th>
+        </tr>
+      </tbody>
+    </table>
+    <div class="order_table" *ngFor="let order of OrdersList">
+      <table width="100%" class="table table-hover" cellspacing="0" cellpadding="10">
+        <tbody>
+          <tr>
+            <td width="200" rowspan="3" colspan="2" class="orderNumCol">
+              <h6>{{order.OrderId}}</h6>
+              <div class="mb-2">{{getDateFormatted(order.OrderedDate)}}</div>
+
+              <div class="mb-0">{{order.TotalCost}}</div>
+              <div>
+                <a href="order.InvoiceLink" style="font-size:12px; text-decoration: none;" target="_blank">
+                  Print Invoice
+                </a>
+              </div>
+            </td>
+            <ng-template ngFor let-item [ngForOf]="order.ItemsList" let-i="index">
+              <div class="d-table w-100">
+              <td width="100"> {{item.JobId}}</td>
+              <td width="100"> <img [src]="sanitize(item.ProductImage)" width="100" /></td>
+              <td width="50">{{item.OrderCount}}</td>
+              <td width="100"><div>{{item.JobName}}</div><br /><span class="muted">{{item.Notes ? item.Notes : ""}}</span></td>
+              <td width="100">
+                <div>
+                  <!-- <span *ngIf="columnHeader.displayColor" class="order-status" [style.background-color]="item['statusColor']"></span>-->
+                  <mat-form-field class="w-70">
+                    <mat-select (selectionChange)="updateOrderStatus(order,i)" [(ngModel)]="item['OrderStatus']">
+                      <mat-option *ngFor="let option of orderStatuses" [value]="option.value" [attr.selected]="option.value == item['OrderStatus']">{{option.label}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </td>
+              <td width="100"> {{item.RefundStatus}}</td>
+              <td width="100">
+                <img *ngIf="item.ArtWorkImgPath" [src]="sanitize(item.ArtWorkImgPath)" (click)="openPopupZoomImg()" width="100" />
+                <p *ngIf="!item.ArtWorkImgPath" width="100">Not Available</p>
+              </td>
+              <td width="100">
+                <div class="mb-2">
+                  <a (click)="onEdit(order,item)" class="btn btn-sm btn-outline-secondary">Order Detail</a>
+                </div>
+                <a (click)="navigateToProduct(item)" class="btn btn-sm btn-outline-secondary">Product Detail</a>
+              </td>
+    </div>
+    </ng-template>
+    </tr>
+    </tbody>
+    </table>
+  </div>
+
+</div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':ImgPopupDisplayStyle}">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content zoomImg_popup p-0">
+      <div class="modal-header">
+        <h4>Art Image</h4>
+        <a class="text-danger" (click)="closePopupZoomImg()"><mat-icon>clear</mat-icon></a>
+      </div>
+      <div class="modal-body p-0">
+        <img [src]="sanitize(selectedImage)" alt="images" class="img-fluid img">
+      </div>
+    </div>
+  </div>
+</div>
+
+

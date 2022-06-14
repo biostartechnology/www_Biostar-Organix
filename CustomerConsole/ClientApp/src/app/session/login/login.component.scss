@@ -1,0 +1,28 @@
+
+
+.btn {
+  color: #fff;
+}
+
+.authincation-content {
+  background: #17a2b8;
+  box-shadow: 0 0 35px 0 rgba(154, 161, 171, 0.15);
+  border-radius: 5px;
+
+  .form-group label {
+    color: #fff;
+  }
+}
+
+.auth-form {
+  padding: 50px 50px;
+
+  .btn {
+    font-weight: 700;
+  }
+
+  .page-back {
+    display: inline-block;
+    margin-bottom: 15px;
+  }
+}

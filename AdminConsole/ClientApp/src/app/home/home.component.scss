@@ -1,0 +1,20 @@
+.mat-button-base{
+    height: 4.125rem;
+    width: 4.125rem;
+    img{
+        display: flex;
+        padding: 0.15rem;
+    }
+    .mat-icon{
+        position: absolute;
+        top: 40px;
+        right: -5px;
+        background-color: #1565c0;
+        height: 2rem;
+        width: 2rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

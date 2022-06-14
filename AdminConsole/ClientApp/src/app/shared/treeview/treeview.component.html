@@ -1,0 +1,39 @@
+<mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+    <mat-tree-node *matTreeNodeDef="let node;"  matTreeNodeToggle matTreeNodePadding (mouseover)="onMouseHover(node)" (mouseout)="onMouseOut(node)">
+      <div class="chkbox_block">
+      <mat-checkbox class="checklist-leaf-node"
+      [checked]="checklistSelection.isSelected(node)"
+      (change)="todoLeafItemSelectionToggle(node)">{{node.name}}</mat-checkbox>
+      <button (click)="addNewCategoryPressed(node)" *ngIf="!node.showInput" class="add-icon-btn"><mat-icon>add</mat-icon></button>
+      </div>
+      <div class="input_block"  *ngIf="node.showInput">
+        <mat-form-field class="full-wid" >
+          <input class="mrgn-t-none" [(ngModel)]="node.newChildVal" matInput placeholder="Name" type="text"  required="true">
+        </mat-form-field>
+        <button mat-raised-button mat-button-sm color="primary" class="mat-button btn-sm mat-button-base mat-primary" [disabled]="!node.newChildVal" (click)="SaveCategoryName(node)">Save</button>
+        <button mat-raised-button mat-button-sm color="danger" class="mat-button mat-button-base mat-warn" (click)="CancelCategoryAdd(node)">Cancel</button> 
+      </div>
+    </mat-tree-node>
+    <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding (mouseover)="onMouseHover(node)" (mouseout)="onMouseOut(node)">
+      <div class="chkbox_block">
+        <mat-icon  matTreeNodeToggle
+        [attr.aria-label]="'Toggle ' + node.name">
+          <mat-icon class="mat-icon-rtl-mirror">
+            {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+          </mat-icon>
+        </mat-icon>
+        <mat-checkbox class="checklist-leaf-node"
+        [checked]="checklistSelection.isSelected(node)"
+        (change)="todoLeafItemSelectionToggle(node)">{{node.name}}</mat-checkbox>
+        <button (click)="addNewCategoryPressed(node)" *ngIf="!node.showInput" class="add-icon-btn"><mat-icon>add</mat-icon></button>
+      </div>
+    
+      <div class="input_block" *ngIf="node.showInput">
+        <mat-form-field class="full-wid" >
+          <input class="mrgn-t-none" [(ngModel)]="node.newChildVal" matInput placeholder="Name" type="text"  required="true">
+        </mat-form-field>
+        <button mat-raised-button mat-button-sm color="primary" class="mat-button btn-sm mat-button-base mat-primary" [disabled]="!node.newChildVal" (click)="SaveCategoryName(node)">Save</button>
+        <button mat-raised-button mat-button-sm color="danger" class="mat-button mat-button-base mat-warn" (click)="CancelCategoryAdd(node)">Cancel</button>
+      </div>
+    </mat-tree-node>
+</mat-tree>

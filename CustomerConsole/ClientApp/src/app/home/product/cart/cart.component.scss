@@ -1,0 +1,28 @@
+
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+th {
+  font-weight: 600;
+}
+
+@media only screen and (min-width: 500px) {
+  .paypal-button-container {
+    min-width: 100% !important;
+    max-width: 750px !important;
+  }
+}
+#zoid-paypal-buttons-uid_f81ff0a6d0_mtu6mty6mty {
+  min-width: 100% !important;
+}
+.catalog-product-view:not(.weltpixel-quickview-catalog-product-view):not(.weltpixel_quickview-catalog_product-view) .box-tocart .action.tocart {
+  height: 43px;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  font-weight: 400;
+  margin-bottom: 5px;
+}

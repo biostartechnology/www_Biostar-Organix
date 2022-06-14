@@ -1,0 +1,78 @@
+<input #fileToUpload type="file" accept="img/*" style="display:none" (change)="imageFileSelected($event,'variant')" multiple />
+
+<div class="mat-card">
+  <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" *ngIf="showTreeView && !showAddView">
+    <mat-tree-node *matTreeNodeDef="let node;" matTreeNodeToggle matTreeNodePadding (mouseover)="onMouseHover(node)" (mouseout)="onMouseOut(node)">
+      <div class="chkbox_block">
+        <mat-checkbox class="checklist-leaf-node"
+                      [checked]="checklistSelection.isSelected(node)"
+                      (change)="todoLeafItemSelectionToggle(node)">{{node.name}}</mat-checkbox>
+        <button (click)="addNewCategoryPressed(node)" *ngIf="!node.showInput" class="add-icon-btn"><mat-icon>add</mat-icon></button>
+      </div>
+      <div class="input_block" *ngIf="node.showInput">
+        <mat-form-field class="full-wid">
+          <input class="mrgn-t-none" [(ngModel)]="node.newChildVal" matInput placeholder="Name" type="text" required="required">
+          <div fxLayout="row" fxLayoutAlign="end center">
+            <button type="button" class="btn btn-outline-primary mr-2" (click)="UploadImageClicked()">Upload Image</button>
+          </div>
+        </mat-form-field>
+        <a class="text-success cursor-pointer" [disabled]="!node.newChildVal" (click)="SaveCategoryName(node)">
+          <mat-icon>check_circle</mat-icon>
+        </a>
+        <a class="text-danger cursor-pointer" (click)="CancelCategoryAdd(node)">
+          <mat-icon>clear</mat-icon>
+        </a>
+      </div>
+    </mat-tree-node>
+    <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding (mouseover)="onMouseHover(node)" (mouseout)="onMouseOut(node)">
+      <div class="chkbox_block">
+        <mat-icon matTreeNodeToggle
+                  [attr.aria-label]="'Toggle ' + node.name">
+          <mat-icon class="mat-icon-rtl-mirror">
+            {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+          </mat-icon>
+        </mat-icon>
+        <mat-checkbox class="checklist-leaf-node"
+                      [checked]="checklistSelection.isSelected(node)"
+                      (change)="todoLeafItemSelectionToggle(node)">{{node.name}}</mat-checkbox>
+        <button (click)="addNewCategoryPressed(node)" *ngIf="!node.showInput" class="add-icon-btn"><mat-icon>add</mat-icon></button>
+      </div>
+
+      <div class="input_block" *ngIf="node.showInput">
+        <mat-form-field class="full-wid">
+          <input class="mrgn-t-none" [(ngModel)]="node.newChildVal" matInput placeholder="Name" type="text" required="required">
+          <div fxLayout="row" fxLayoutAlign="end center">
+            <button type="button" class="btn btn-outline-primary mr-2" (click)="UploadImageClicked()">Upload Image</button>
+          </div>
+        </mat-form-field>
+        <a class="text-success cursor-pointer" [disabled]="!node.newChildVal" (click)="SaveCategoryName(node)">
+          <mat-icon>check_circle</mat-icon>
+        </a>
+        <a class="text-danger cursor-pointer" (click)="CancelCategoryAdd(node)">
+          <mat-icon>clear</mat-icon>
+        </a>
+      </div>
+    </mat-tree-node>
+  </mat-tree>
+</div>
+
+<app-table *ngIf="!showTreeView && !showAddView" [config]="tableData" (onAnyAction)="onAnyAction($event)" (deleteClick)="deleteCategoryClicked($event)" (addClick)="addCategoryClick($event)" (reloadData)="getCategoryDetails($event)"></app-table>
+
+<div class="mat-card" *ngIf="showAddView">
+  <div class="gene-card-title">
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <h4>Category Details</h4>
+    </div>
+    <mat-divider></mat-divider>
+  </div>
+  <div class="gene-card-content">
+    <app-input *ngFor="let input of catInputDetails1" [config]="input"></app-input>
+    <div fxLayout="row" fxLayoutAlign="end center">
+      <button type="button" class="btn btn-outline-primary mr-2" (click)="UploadImageClicked()">Upload Image</button>
+    </div>
+    <app-treeview (TreeData)="categoryTreeView"></app-treeview>
+  </div>
+  <div fxLayoutAlign="center start">
+    <button class="btn-primary btn btn-sm" (click)="SaveCategoryDetails()">Save</button>
+  </div>
+</div>

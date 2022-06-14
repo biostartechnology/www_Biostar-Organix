@@ -1,0 +1,9 @@
+<mat-form-field class="full-wid" [class]="config.styleClass" *ngIf="config.type != 'radio'">
+    <input class="mrgn-t-none" [(ngModel)]="config.fieldValue"  matInput [placeholder]="config.label" [type]="config.type"  [required]="config.required" [min]="config.min ? config.min:''">
+    <span matSuffix><i class="material-icons"></i>{{config.iconClass}}</span>     
+ </mat-form-field>
+<div *ngIf="config.type === 'radio'">
+  <input class="mrgn-t-none" [(ngModel)]="config.fieldValue"  [placeholder]="config.label" [type]="config.type" [required]="config.required" >
+  <span matSuffix><i class="material-icons"></i>{{config.iconClass}}</span>
+</div>
+ <div *ngIf="!config.isValid" class="help-block mt-1 text-danger"><i class="ft-alert-circle align-middle">{{ config.errorMesg ? config.errorMesg : "Please enter " + config.label }}</i></div>                         

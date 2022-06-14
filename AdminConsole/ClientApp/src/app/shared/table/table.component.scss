@@ -1,0 +1,127 @@
+
+table.mat-table {
+    border-spacing: 0;
+}
+tr.mat-header-row {
+    height: 56px;
+}
+tr.mat-row,
+tr.mat-footer-row {
+    height: 48px;
+    border-bottom: 1px solid #efefef;
+}
+th.mat-header-cell {
+    text-align: left;
+}
+[dir="rtl"] th.mat-header-cell {
+    text-align: right;
+}
+th.mat-header-cell,
+td.mat-cell,
+td.mat-footer-cell {
+    padding: 0;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    text-align: center;
+}
+th.mat-header-cell:first-of-type,
+td.mat-cell:first-of-type,
+td.mat-footer-cell:first-of-type {
+    padding-left: 24px;
+}
+
+thead{
+    box-shadow: inset 1px -1px 3px #efefef;
+    background-color: #f7f7f7;
+    .mat-header-cell {
+        font-size: 13px;
+        font-weight: 600;
+        position: sticky; 
+        top: -1px; 
+        background-color: #f7f7f7;
+        z-index: 1;
+    }
+}
+.table-fixed  tbody        { 
+    overflow-y: auto; 
+  }
+// select dropdown mat
+
+.mat-select-value{
+    height: 16px;
+    padding-bottom: 0px;
+    font-size: 0.875rem;
+}
+
+// search filed 
+.mat-input-element{
+    padding-bottom: 6px;
+    height: 28px;
+    font-size: 1rem;
+}
+.listView_toolBar{
+    background-color: #f0f2f7;
+    padding: 0.25rem 1rem;
+}
+.grid_view {
+    background-color: #f0f2f7;
+    .prod_img{
+        min-height: 245px;
+    }
+}
+
+.table-responsive{
+    height: 38rem;
+}
+.tit_ellipsis{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    transform: translateX(0);
+    transition: 0.5s;
+}
+.tit_ellipsis:hover{
+    overflow: visible;
+    transform: translateX(calc(100px - 100%));
+}
+
+.tableDiv{
+    display: contents;
+}
+.rowDiv:hover{
+ background-color: #fff;
+}
+
+.variants-table .table-responsive {
+  height: 14rem;
+}
+
+.order-status{
+    display: inline-block;
+    margin-right: 5px;
+    width: 6px;
+    height: 20px;
+    vertical-align: middle;
+    background: #607d8b;
+    margin: 0 0.5rem;
+    .th{
+        font-size: 14px;
+    }
+}
+
+.mat-button-wrapper{
+	.mat-icon{
+		color:#aeadb3;
+		font-size: 1.5rem;
+	}
+}
+
+tr.selected {
+  background-color: #e3e2e2;
+}
+
+.table-responsive {
+  border: 1px solid #f7f5f5;
+}
+
+

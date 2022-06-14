@@ -1,0 +1,27 @@
+<div class="width-100 d-flex flex-column">
+  <app-table *ngIf="!priceMarkUpDetailsView" (onAnyAction)="onAnyAction($event)" (addClick)="addPriceMarkUpClick($event)" (deleteClick)="deletePriceMarkUpClicked($event)" (reloadData)="getDatFromServer($event)" [config]="PriceMarkUpTableConfig"></app-table>
+
+  <div class="content-box" *ngIf="priceMarkUpDetailsView">
+    <div id="basicInfo" class="mat-card">
+      <div class="gene-card-title">
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <h4>{{'Price Mark Up'}}</h4>
+        </div>
+      </div>
+      <div class="gene-card-content">
+        <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+          <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100">
+            <app-input *ngFor="let f of priceMarkUpsField" [config]="f"></app-input>
+          </div>
+        </div>
+      </div>
+      <div class="action-bar" *ngIf="!isEdit">
+        <button type="button" class="btn btn-danger mr-2 float-right" (click)="CancelClicked()">Cancel</button>
+        <button type="button" class="btn btn-primary mr-2 float-right" (click)="CreateClicked()">Save</button>
+      </div>
+      <div class="action-bar" *ngIf="isEdit">
+        <button type="button" class="btn btn-primary mr-2 float-left" (click)="CancelClicked()">Back</button>
+      </div>
+    </div>
+  </div>
+</div>

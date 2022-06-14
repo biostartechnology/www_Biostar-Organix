@@ -1,0 +1,290 @@
+<input #fileToUpload1 type="file" accept="img/*" style="display:none" (change)="imageFileSelected($event,'customAttr')" multiple/>
+<input #fileToUpload type="file" accept="img/*" style="display:none" (change)="imageFileSelected($event,'product')" multiple/>
+<input #fileToUpload2 type="file" accept="img/*" style="display:none" (change)="imageFileSelected($event,'variant')" multiple/>
+
+
+<div class="width-100 d-flex flex-column" [class.d-none]="showVariantsOption">
+  <div class="action-bar">
+    <button type="button" class="btn btn-danger mr-2 ml-3" (click)="CancelClicked()">Cancel</button>
+    <button type="button" class="btn btn-primary mr-2" (click)="CreateClicked()">Save</button>
+  </div>
+  <div class="content-box">
+    <div id="basicInfo" class="mat-card">
+      <div class="gene-card-title">
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <h4>{{'Basic Information'}}</h4>
+        </div>
+        <mat-divider></mat-divider>
+      </div>
+      <div class="gene-card-content">
+        <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+          <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100">
+            <app-input [config]="productDetails[0]"></app-input>
+            <app-input [config]="productDetails[2]"></app-input>
+          </div>
+          <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100">
+            <app-input [config]="productDetails[1]"></app-input>
+
+            <app-input [config]="productDetails[5]"></app-input>
+            <app-input [config]="productDetails[14]"></app-input>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="category" class="mat-card">
+      <div class="gene-card-title">
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <h4>{{'Category'}}</h4>
+        </div>
+        <mat-divider></mat-divider>
+      </div>
+      <div class="gene-card-content">
+        <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+          <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+            <app-product-categories [(selectedCategory)]="selectedCatId" [(selectedCatName)]="selectedCatName"></app-product-categories>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="basicInfo" class="mat-card">
+      <div class="gene-card-title">
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <h4>
+            {{'Pricing'}}  <span *ngIf="selectedCatId == 'd207802c-d55b-44fa-af81-84c4438969da'">( Per SqFt )</span>
+          </h4>
+        </div>
+        <mat-divider></mat-divider>
+      </div>
+      <div class="gene-card-content">
+        <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+          <app-input [config]="productDetails[3]"></app-input>
+          <app-input [config]="productDetails[15]"></app-input>
+          <app-input *ngIf="selectedCatId == '94926d24-4dfd-4c87-b06e-29a558add24c'" [config]="productDetails[16]"></app-input>
+          <app-input [config]="productDetails[17]"></app-input>
+          <app-input [config]="productDetails[18]"></app-input>
+          <app-input [config]="productDetails[19]"></app-input>
+          <app-input [config]="productDetails[20]"></app-input>
+        </div>
+      </div>
+    </div>
+    
+    <div id="description" class="mat-card">
+      <div class="gene-card-title">
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <h4>{{'Description & Warranty'}}</h4>
+        </div>
+        <mat-divider></mat-divider>
+      </div>
+      <div class="gene-card-content">
+        <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+          <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+            <span>{{productDetails[4].label}}</span>
+            <quill-editor [(ngModel)]="productDetails[4].fieldValue"></quill-editor>
+            <span>{{productDetails[6].label}}</span>
+            <quill-editor [(ngModel)]="productDetails[6].fieldValue"></quill-editor>
+            <span>{{productDetails[13].label}}</span>
+            <quill-editor [(ngModel)]="productDetails[13].fieldValue"></quill-editor>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="images" class="mat-card">
+      <div class="gene-card-title">
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <h4>{{'Images'}}</h4>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end center">
+          <button type="button" class="btn btn-outline-primary mr-2" (click)="UploadImageClicked('product',-1)">Upload Images</button>
+
+        </div>
+        <mat-divider></mat-divider>
+      </div>
+      <div class="gene-card-content" style="max-height: 15rem; overflow: auto;">
+        <div fxLayout="row" fxLayoutAlign="space-between center" class="display-flex flex-wrap">
+          <div *ngFor="let img of ImageList;let i =index;" class='img-previewList'>
+            <img [src]="img.image_url" />
+            <div class='img-delete' (click)="DeleteImageClicked(i)"></div>
+          </div>
+          <!--<app-table (onAnyAction)="onAnyAction($event)" [config]="ImageTableConfig"></app-table>-->
+        </div>
+      </div>
+    </div>
+    <div id="videos" class="mat-card">
+      <div class="gene-card-title">
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <h4>{{'Videos'}}</h4>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end center">
+          <button type="button" class="btn btn-outline-info mr-2" (click)="AddFromUrlClicked(content)">Add from Url</button>
+        </div>
+        <mat-divider></mat-divider>
+      </div>
+      <div class="gene-card-content" style="max-height: 15rem;">
+        <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+          <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+            <ul>
+              <li *ngFor="let video of VideoList">video <span (click)="DeleteVideoClicked(video)">- Delete</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="identifiers" class="mat-card">
+      <div class="gene-card-title">
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <h4>{{'Product Identifiers'}}</h4>
+        </div>
+        <mat-divider></mat-divider>
+      </div>
+      <div class="gene-card-content">
+        <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+          <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100">
+            <app-input [config]="productDetails[7]"></app-input>
+            <app-input [config]="productDetails[8]"></app-input>
+          </div>
+          <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100">
+            <app-input [config]="productDetails[9]"></app-input>
+            <app-input [config]="productDetails[10]"></app-input>
+            <app-input [config]="productDetails[11]"></app-input>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="warning" class="mat-card">
+      <div class="gene-card-title">
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <h4>{{'Warning'}}</h4>
+        </div>
+        <mat-divider></mat-divider>
+      </div>
+      <div class="gene-card-content">
+        <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+          <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100">
+            <span>{{productDetails[12].label}}</span>
+            <quill-editor [(ngModel)]="productDetails[12].fieldValue"></quill-editor>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="variants" class="mat-card">
+      <div class="gene-card-title">
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <h4>{{'Variants'}}</h4>
+        </div>
+        <mat-divider></mat-divider>
+      </div>
+      <div class="gene-card-content" *ngFor="let field of variantFields;let i=index">
+        <div class="mat-card">
+          <div class="gene-card-title">
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <h5>
+                Variant {{ i + 1 }}
+                <span class="closeBtnIcn float-right" (click)="removeVariant(i)"></span>
+              </h5>
+            </div>
+            <mat-divider></mat-divider>
+          </div>
+          <div class="gene-card-content">
+            <img *ngFor="let field of field[1].fieldValue" class="customatt-img" [src]="sanitize(field.image_url)" />
+            <app-input [config]="field[0]"></app-input>
+            <div fxLayout="row" fxLayoutAlign="end center">
+              <button type="button" class="btn btn-outline-primary mr-2" (click)="UploadImageClicked('variant', i)">Upload Image</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a (click)="addVariant()"><span>+ Add Variant</span></a>
+    </div>
+    <div id="customFields" class="mat-card">
+      <div class="gene-card-title">
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <h4>{{'Custom Fields'}}</h4>
+        </div>
+        <h5>
+          Custom fields allow you to specify additional information that will appear on the products page.
+          Custom fields appear automatically in the product's details if they are defined on the product. If you
+          don't want to show any custom fields, simply remove them from the product.
+        </h5>
+        <mat-divider></mat-divider>
+      </div>
+      <div class="gene-card-content" *ngFor="let field of customFields;let i=index">
+        <div class="mat-card">
+          <div class="gene-card-title">
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <h5>
+                Custom Field {{ i + 1 }}
+                <span class="closeBtnIcn float-right" (click)="removeField(i)"></span>
+              </h5>
+            </div>
+            <mat-divider></mat-divider>
+          </div>
+          <div class="gene-card-content">
+            <img *ngFor="let field of field[2].fieldValue" class="customatt-img" [src]="sanitize(field.image_url)" />
+            <app-input [config]="field[0]"></app-input>
+            <span>{{field[1].label}}</span>
+            <quill-editor [(ngModel)]="field[1].fieldValue"></quill-editor>
+            <div fxLayout="row" fxLayoutAlign="end center">
+              <button type="button" class="btn btn-outline-primary mr-2" (click)="UploadImageClicked('customAttr', i)">Upload Image</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a (click)="addCustomField()"><span>+ Add Custom Fields</span></a>
+    </div>
+    <div id="questionans" class="mat-card">
+      <div class="gene-card-title">
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <h4>{{'Q&A'}}</h4>
+        </div>
+        <mat-divider></mat-divider>
+      </div>
+      <div class="gene-card-content" *ngFor="let field of qaFields;let i=index">
+        <div class="mat-card">
+          <div class="gene-card-title">
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <h5>
+                Question {{ i + 1 }}
+                <span class="closeBtnIcn float-right" (click)="removeQAField(i)"></span>
+              </h5>
+            </div>
+            <mat-divider></mat-divider>
+          </div>
+          <div class="gene-card-content">
+            <app-input [config]="field[0]"></app-input>
+            <span>{{field[1].label}}</span>
+            <quill-editor [(ngModel)]="field[1].fieldValue"></quill-editor>
+          </div>
+        </div>
+      </div>
+      <a (click)="addQAField()"><span>+ Add More Q&A</span></a>
+    </div>
+  </div>
+</div>
+
+<ng-template #content let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Add YouTube Video from URL</h4>
+    <button type="button" class="close" aria-label="Close" (click)="closeModel()">
+      x
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-input [config]="productVideoUrl"></app-input>
+  </div>
+  <div class="modal-footer">
+    <button type="button"
+            class="btn-danger btn mr-2"
+            (click)="closeModel()">
+      Cancel
+    </button>
+    <button type="button"
+            class="btn-primary btn mr-2"
+            (click)="SaveVideoClicked(productVideoUrl.fieldValue)">
+      Save
+    </button>
+  </div>
+</ng-template>
+
+
+<!-- <app-product-variants [config]="VariantsList" (cancel)="showVariantsOption = false;" [class.d-none]="!showVariantsOption" (save)="savedVariants($event)"></app-product-variants> -->

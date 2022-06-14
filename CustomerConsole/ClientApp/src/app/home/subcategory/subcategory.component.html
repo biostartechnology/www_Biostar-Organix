@@ -1,0 +1,31 @@
+
+<div class="row w-100"  *ngIf="_productList && _productList.length > 0">
+  <div class="d-flex">
+    <h5>{{category.name}}</h5>
+  </div>
+  <ng-template ngFor let-cat [ngForOf]="category.children">
+    <div class="card mb-3 mt-3 w-100">
+      <h5 class="card-header">{{cat.name}}</h5>
+      <ng-template ngFor let-product [ngForOf]="_productList" >
+        <div class="card-body d-flex align-items-center" *ngIf="cat.id == product.CategoryId">
+          <div class="w-50 m-2 pr-2">
+            <img *ngIf="product.ImagesUrls" [src]="sanitze(product.ImagesUrls[0].Path)" class="card-img-top img prod-img" alt="..." />
+          </div>
+          <div>
+            <div class="mb-3" *ngIf="product.shorttdiscription" [innerHTML]="product.shorttdiscription | sanitizeHtml">
+
+            </div>
+            <div *ngIf="product.sizes && product.sizes.length > 0">
+              <h5>Sizes</h5>
+              <div *ngFor="let p of product.sizes" (click)="onclick(p)" ><a class="btn btn-link btn-sm">{{p.ProductName}}</a></div>
+            </div>
+            <div *ngIf="!product.sizes || product.sizes.length == 0">
+              <a (click)="onclick(product)" class="btn btn-secondary">More Details</a>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </ng-template>
+ 
+</div>

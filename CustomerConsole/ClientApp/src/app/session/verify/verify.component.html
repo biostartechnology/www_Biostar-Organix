@@ -1,0 +1,11 @@
+<div class="container h-100 mt-5">
+    <div class="row justify-content-center h-100 align-items-center" *ngIf="step == 0">
+        <div class="help-block mt-1 text-danger"><div class="loader" *ngIf="showLoader">Verifying...</div></div>
+    </div>
+    <div class="row justify-content-center h-100 align-items-center" *ngIf="step == -1">
+        <div class="help-block mt-1 text-danger"><i class="ft-alert-circle align-middle">{{message}}</i></div>
+    </div>
+    <div class="row justify-content-center h-100 align-items-center" *ngIf="step == 3">
+        <div class="help-block mt-1 text-info"><i class="ft-circle-check align-middle">{{message}}</i></div>
+    </div>
+</div>

@@ -1,0 +1,275 @@
+<div class="right_order_form">
+  <div class="right_form_header px-2">
+    <h6>Quote and Order</h6>
+  </div>
+
+  <div [ngSwitch]="orderView">
+    <!--Banner UIS-->
+    <div class="text-center mx-1 my-2" *ngSwitchCase="3">
+      <div class="Banners my-3">
+        <div class="tab">
+          <button class="tablinks active" (click)="onSelect($event, 'Banner-Hardware')">Banner + Hardware</button>
+          <button class="tablinks" (click)="onSelect($event,'Banner-Only')">Banner</button>
+          <button class="tablinks" (click)="onSelect($event,'Hardware-Only')">Hardware</button>
+        </div>
+
+        <div id="Banner-Hardware" class="mt-3 tabcontent " style="display:block">
+          <div class="d-flex justify-content-between my-1 mx-2 turnaround row">
+            <label class="mr-2 mt-1 col-md-4 text-left p-0">Size</label>
+            <select [(ngModel)]="poleBannerSize" (change)="onSizeChange(poleBannerSize)" class="form-control col-md-7 h-75 px-1 py-0">
+              <option *ngFor="let size of poleBannerSizeArray" [value]="size.value">{{size.label}}</option>
+            </select>
+          </div>
+
+          <div class="d-flex justify-content-between my-1 mx-2 turnaround row">
+            <label class="mr-2 mt-1 col-md-4 text-left p-0">Graphic</label>
+            <label class="mr-2 mt-1 col-md-4 text-left p-0">Double Sided</label>
+          </div>
+
+          <div class="d-flex justify-content-between my-1 mx-2 turnaround row">
+            <label class="mr-2 mt-1 col-md-4 text-left p-0">Material</label>
+            <label class="mr-2 mt-1 col-md-4 text-left p-0">18oz. Blockout Vinyl Banner</label>
+          </div>
+
+          <div class="d-flex justify-content-between my-1 mx-2 turnaround row">
+            <label class="mr-2 mt-1 col-md-4 text-left p-0">Pole Pocket</label>
+            <label class="mr-2 mt-1 col-md-4 text-left p-0">
+              2" - Top and Bottom
+            </label>
+          </div>
+
+          <div class="d-flex justify-content-between my-1 mx-2 turnaround row">
+            <label class="mr-2 mt-1 col-md-4 text-left p-0">Grommet</label>
+            <label class="mr-2 mt-1 col-md-4 text-left p-0">
+              4 Corner Only
+            </label>
+          </div>
+
+          <div class="d-flex justify-content-between my-1 mx-2 turnaround row">
+            <label class="mr-2 mt-1 col-md-4 text-left p-0">Carry Bag	</label>
+            <select [(ngModel)]="Windslit" class="form-control col-md-7 h-75 px-1 py-0">
+              <option *ngFor="let i of windSlit" value="i">{{i}}</option>
+            </select>
+          </div>
+        </div>
+
+
+        <div id="Banner-Only" class="mt-3 tabcontent">
+          <div class="d-flex justify-content-between my-1 mx-2 turnaround row">
+            <label class="mr-2 mt-1 col-md-4 text-left p-0">Size</label>
+            <select [(ngModel)]="poleBannerSize" (change)="onSizeChange(poleBannerSize)" class="form-control col-md-7 h-75 px-1 py-0">
+              <option *ngFor="let size of poleBannerSizeArray" [value]="size.value">{{size.label}}</option>
+            </select>
+          </div>
+
+          <div class="d-flex justify-content-between my-1 mx-2 turnaround row">
+            <label class="mr-2 mt-1 col-md-4 text-left p-0">Graphic</label>
+            <label class="mr-2 mt-1 col-md-4 text-left p-0">Double Sided</label>
+          </div>
+          <div class="d-flex justify-content-between my-1 mx-2 turnaround row">
+            <label class="mr-2 mt-1 col-md-4 text-left p-0">Material</label>
+            <label class="mr-2 mt-1 col-md-4 text-left p-0">18oz. Blockout Vinyl Banner</label>
+          </div>
+
+          <div class="d-flex justify-content-between my-1 mx-2 turnaround row">
+            <label class="mr-2 mt-1 col-md-4 text-left p-0">Pole Pocket</label>
+            <label class="mr-2 mt-1 col-md-4 text-left p-0">
+              2" - Top and Bottom
+            </label>
+          </div>
+
+          <div class="d-flex justify-content-between my-1 mx-2 turnaround row">
+            <label class="mr-2 mt-1 col-md-4 text-left p-0">Grommet</label>
+            <label class="mr-2 mt-1 col-md-4 text-left p-0">
+              4 Corner Only
+            </label>
+          </div>
+
+          <div class="d-flex justify-content-between my-1 mx-2 turnaround row">
+            <label class="mr-2 mt-1 col-md-4 text-left p-0">Wind Slit</label>
+            <select [(ngModel)]="Windslit" class="form-control col-md-7 h-75 px-1 py-0">
+              <option *ngFor="let i of windSlit" value="i">{{i}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="Hardware-Only" class="mt-3 tabcontent">
+          <div class="d-flex justify-content-between my-1 mx-2 turnaround row">
+            <label class="mr-2 mt-1 col-md-4 text-left p-0">Width</label>
+            <select [(ngModel)]="poleWidth" class="form-control col-md-7 h-75 px-1 py-0">
+              <option *ngFor="let i of bannerPoleMaxHeight" value="i">{{i}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mx-1 my-2" *ngSwitchCase="1">
+      <div class="Banners my-3">
+        <div class="row mx-2">
+          <label class="col-md-2 p-0 text-left">Width</label>
+          <div class="col-md-10 p-0 text-right">
+            <input [(ngModel)]="widthFt" class="col-md-5 mr-1" type="text" placeholder="feet" (change)="onSizeChange(getSQFT())" />
+            <input [(ngModel)]="widthInch" class="col-md-5" type="text" placeholder="inch" (change)="onSizeChange(getSQFT())" />
+          </div>
+        </div>
+        <div class="row mx-2">
+          <label class="col-md-2 p-0 text-left">Height</label>
+          <div class="col-md-10 p-0 text-right">
+            <input [(ngModel)]="heightFt" class="col-md-5 mr-1" type="text" placeholder="feet" (change)="onSizeChange(getSQFT())" />
+            <input [(ngModel)]="heightInch" class="col-md-5" type="text" placeholder="inch" (change)="onSizeChange(getSQFT())" />
+          </div>
+        </div>
+        <div colspan="2" class="text-right mx-2">
+          <p class="text-size"><span>{{getWidth()}}&#8243;</span> X <span>{{getHeight()}}&#8243;</span> = <span>{{ getSQFT() }} </span> ft<sup>2</sup></p>
+        </div>
+        <div>
+          <div class="d-flex justify-content-between my-1 mx-2 turnaround row">
+            <label class="mr-2 mt-1 col-md-4 text-left p-0"># of Sides</label>
+            <select [(ngModel)]="noOfSides" class="form-control col-md-7 h-75 px-1 py-0">
+              <option value="1 Side">1 Side</option>
+              <option value="2 Sides">2 Sides</option>
+            </select>
+          </div>
+          <div class="d-flex justify-content-between mx-2 text-left">
+            <p class="text-size col-md-4 p-0">Material</p>
+            <p class="text-size col-md-7 p-0">{{Product.ProductTitle}}</p>
+          </div>
+        </div>
+        <div class="text-left mt-2 px2">
+          <h6 class="mx-2 mb-3 underline">Finishing</h6>
+          <div class="d-flex justify-content-between my-1 mx-2 turnaround row">
+            <label class="mr-2 mt-1 col-md-4 text-left p-0 m-0">Pole Pocket	</label>
+            <select [(ngModel)]="polePocket" class="form-control col-md-7 h-75 px-1 py-0">
+              <option value="No Pole Pockets">No Pole Pockets</option>
+              <option value='2" - Top and Bottom'>2&#8243; - Top and Bottom</option>
+              <option value='3" - Top and Bottom'>3&#8243; - Top and Bottom</option>
+              <option value='4" - Top and Bottom'>4&#8243; - Top and Bottom</option>
+              <option value='2" - Top Only'>2&#8243; - Top Only</option>
+              <option value='3" - Top Only'>3&#8243; - Top Only</option>
+              <option value='4" - Top Only'>4&#8243; - Top Only</option>
+              <!-- <option value='2" Pole Pockets'>Custom Pole Pocket</option> -->
+            </select>
+          </div>
+          <div class="d-flex justify-content-between my-1 mx-2 turnaround row">
+            <label class="mr-2 mt-1 col-md-4 text-left p-0 m-0">Hem	</label>
+            <select [(ngModel)]="hem" class="form-control col-md-7 h-75 px-1 py-0">
+              <option value="All Sides">All Sides</option>
+            </select>
+          </div>
+          <div class="d-flex justify-content-between my-1 mx-2 turnaround row">
+            <label class="mr-2 mt-1 col-md-4 text-left p-0 m-0">Grommet	</label>
+            <select [(ngModel)]="grommet" class="form-control col-md-7 h-75 px-1 py-0">
+              <option value='Every 2" All Sides'>Every 2&#8242; All Sides</option>
+              <option value='Every 2" Top and Bottom'>Every 2&#8242; Top and Bottom</option>
+              <option value='Every 2" Left and Right'>Every 2&#8242; Left and Right</option>
+              <option value='4 Corners only'>4 Corners only</option>
+              <!-- <option value="All Sides" >Custom Grommets</option> -->
+            </select>
+          </div>
+          <div class="d-flex justify-content-between my-1 mx-2 turnaround row">
+            <label class="mr-2 mt-1 col-md-4 text-left p-0 m-0">Windslit	</label>
+            <select [(ngModel)]="windslit" class="form-control col-md-7 h-75 px-1 py-0">
+              <option value="No Windslit">No Windslit</option>
+              <option value="Standard Windslit">Standard Windslit</option>
+            </select>
+          </div>
+          <div class="d-flex justify-content-between my-1 mx-2 turnaround row">
+            <label class="mr-2 mt-1 col-md-4 text-left p-0 m-0">Webbing	</label>
+            <select [(ngModel)]="webbing" class="form-control col-md-7 h-75 px-1 py-0">
+              <option value="No Webbing, No D-rings">No Webbing, No D-rings </option>
+              <option value='1" Webbing'>1&#8243; Webbing</option>
+              <option value='1" Webbing w/D-rings'>1&#8243; Webbing w/D-rings</option>
+              <option value='1" velcro - All Sides'>1&#8243; velcro - All Sides</option>
+            </select>
+          </div>
+          <div class="d-flex justify-content-between my-1 mx-2 turnaround row">
+            <label class="mr-2 mt-1 col-md-4 text-left p-0 m-0"> Corners</label>
+            <select [(ngModel)]="corner" class="form-control col-md-7 h-75 px-1 py-0">
+              <option value='Reinforced Top Only'>Reinforced Top Only</option>
+              <option value='Reinforced Top Only'>Reinforced Top Only</option>
+              <option value='Reinforced Bottom Only'>Reinforced Bottom Only</option>
+              <option value='Reinforced All Corners'>Reinforced All Corners</option>
+            </select>
+          </div>
+          <div class="d-flex justify-content-between my-1 mx-2 turnaround row">
+            <label class="mr-2 mt-1 col-md-4 text-left p-0 m-0">Rope</label>
+            <select [(ngModel)]="rope" class="form-control col-md-7 h-75 px-1 py-0">
+              <option value='No Rope Sewn'>No Rope Sewn</option>
+              <option value='3/16" Top Only'>3/16&#8243; Top Only</option>
+              <option value='3/16" Bottom Only'>3/16&#8243; Bottom Only</option>
+              <option value='3/16" Top and Bottom'>3/16&#8243; Top and Bottom</option>
+              <option value='5/16" Top Only'>5/16&#8243; Top Only</option>
+              <option value='5/16" Bottom Only'>5/16&#8243; Bottom Only</option>
+              <option value='5/16" Top and Bottom'>5/16&#8243; Top and Bottom</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center d-flex align-items-center flex-column mx-1 my-2" *ngSwitchCase="4">
+      <button type="button" class="btn btn-default btn-sm p-1 my-1 w-75 d-flex align-items-center justify-content-center"><mat-icon class="mr-1">edit</mat-icon>Start From Scratch</button>
+      <button type="button" class="btn btn-default btn-sm p-1 my-1 w-75 d-flex align-items-center justify-content-center"><mat-icon class="mr-1">upload</mat-icon>Upload My Artwork</button>
+      <button type="button" class="btn btn-default btn-sm p-1 my-1 w-75 d-flex align-items-center justify-content-center"><mat-icon class="mr-1">folder</mat-icon>Open Recent Design</button>
+    </div>
+
+  </div>
+
+
+  <div class="d-flex justify-content-between px-2 py-1 align-items-center set-price">
+    <span>Quantity</span>
+    <input type="text" [(ngModel)]="OrderCount" placeholder="1" name="text" class="form-control mx-2 py-0 w-50 h-25" (change)="updatePrice()" />
+    <b>${{TotalPrice}}</b>
+  </div>
+  <div class="d-flex justify-content-between my-2 mx-2 turnaround">
+    <label class="mr-2 col-md-3 text-left p-0">Turnaround	</label>
+    <select [(ngModel)]="turnAround" class="form-control col-md-8 h-75 p-0">
+      <option value="Next Day (before 10am PST)">Next Day (before 10am PST)</option>
+      <option value="3-Day (Rush)">3-Day (Rush)</option>
+      <option value="5-7 (Standard)">5-7 (Standard)</option>
+    </select>
+  </div>
+  <div class="d-flex justify-content-between my-1 mx-2 turnaround">
+    <label class="mr-2 col-md-3 text-left p-0">Design Proof</label>
+    <select [(ngModel)]="designProof" class="form-control col-md-8 h-75 p-0">
+      <option value="No Proof, Run As Is">No Proof, Run As Is</option>
+      <option value="Email Proof">Email Proof</option>
+    </select>
+  </div>
+  <!--<div class-"hr-line"></div>-->
+  <div class="text-left mt-2 right_form_options px-2">
+    <h6 class="m-0 underline">Shipping options</h6>
+    <div class="radio mt-2 d-flex shopOpt-radio p-0 turnaround">
+      <input (change)="onShippingChange(0)" [checked]="shippingType === 0" type="radio" name="optradio" class="mr-1 form-control"><label>Store Pickup (By Appointment Only)</label>
+    </div>
+    <p class="font-weight-bold m-0">Shipping</p>
+    <div class="d-flex col-md-12 p-0">
+      <div class="radio mt-1 col-md-6 d-flex shopOpt-radio-2 p-0 turnaround">
+        <input (change)="onShippingChange(1)" [checked]="shippingType === 1" type="radio" name="optradio" class="mr-1 form-control"><label>Default Ship</label>
+      </div>
+    </div>
+    <div *ngIf="shippingType == 0" class="d-flex justify-content-between my-2 mx-2 turnaround">
+     <p>{{getDeliveryEstimation()}}</p>
+    </div>
+    <div *ngIf="shippingType == 1" class="d-flex justify-content-between my-2 mx-2 turnaround">
+      <select [(ngModel)]="shipping" class="form-control col-md-10 h-75 p-0" (change)="shippingSelected()">
+        <option value="0">Next Day (before 10am PST) - ${{Product.ShippingCharge0}}</option>
+        <option value="3">3-Day (Rush) - ${{Product.ShippingCharge3}}</option>
+        <option value="7">5-7 (Standard) - ${{Product.ShippingCharge7}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="d-flex justify-content-between right_form_header mb-3 px-2">
+    <p class="m-0"> Shipping Charge </p>
+    <p class="m-0">${{ShippingCharge}}</p>
+    <p class="m-0">Total</p>
+    <p class="m-0">${{TotalPrice}}</p>
+  </div>
+  <div class="d-flex justify-content-between job-name mx-2">
+    <p>Job Name/PO</p>
+    <p><input type="text" [(ngModel)]="JobName" placeholder="Job Name(Required)" required /></p>
+  </div>
+  <div class="text-center">
+    <button (click)="addtoCartOrder()" type="button" class="btn btn-success my-3"><i class="far fa-edit my-3"></i>Add To Cart</button>
+  </div>
+</div>

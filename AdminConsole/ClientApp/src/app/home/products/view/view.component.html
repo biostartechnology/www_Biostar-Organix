@@ -1,0 +1,4 @@
+<div class="mat-card" >
+  <app-table *ngIf="!editMode" (onAnyAction)="onAnyAction($event)" (addClick)="addProductClick($event)" (deleteClick)="deleteProductClicked($event)" (reloadData)="getDatFromServer($event)" [config]="ItemsTableConfig"></app-table>
+  <app-add-product-details *ngIf="editMode" [productData]="productData" (editDone)="onEditDone()"></app-add-product-details>
+</div>

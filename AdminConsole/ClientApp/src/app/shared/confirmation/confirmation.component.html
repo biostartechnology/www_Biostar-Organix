@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Hi {{data.title}}</h1>
+<div mat-dialog-content>
+  <p>{{data.message}}</p>
+  <app-input [config]="notes"></app-input>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="notes.fieldValue" cdkFocusInitial>Continue</button>
+</div>

@@ -1,0 +1,171 @@
+<div class="mrgn-l-md mrgn-r-md">
+  <div fxLayout="row wrap" fxLayoutAlign="start" class="gene-form-wizard">
+    <mat-tab-group [selectedIndex]="selectedIndex">
+        <mat-tab label="Customer Info">
+          <mat-card fxFlex="100%">
+            <div id="customerInfo">
+              <div class="gene-card-title mrgn-t-md">
+                  <div fxLayout="row" fxLayoutAlign="start center">
+                    <div fxLayout="column">
+                        <h4>{{'Customer Information'}}</h4>
+                    </div>
+                    <span fxFlex></span> 
+                  </div>
+                  <mat-divider></mat-divider>
+              </div>
+              <div class="gene-card-content">
+                  <mat-radio-group [(ngModel)]="customerInfoFields[0].fieldValue" #radioGroup="matRadioGroup">
+                    <mat-radio-button value="true" class="mr-3">{{ customerInfoFields[0].label }}</mat-radio-button>
+                    <mat-radio-button value="false">{{ customerInfoFields[1].label }}</mat-radio-button>
+                  </mat-radio-group>
+          
+                  <div [class.d-none]="customerInfoFields[0].fieldValue == 'false'">
+                    <mat-form-field class="full-wid" [class]="customerInfoFields[2].styleClass">
+                      <input (onchange)="SearchCustomer(customerInfoFields[2].fieldValue)" class="mrgn-t-none" [(ngModel)]="customerInfoFields[2].fieldValue"  matInput [placeholder]="customerInfoFields[2].label" [type]="customerInfoFields[2].type"  [required]="customerInfoFields[2].required">
+                      <span matSuffix><i class="material-icons"></i>{{customerInfoFields[2].iconClass}}</span>     
+                  </mat-form-field>
+                  <div *ngIf="!customerInfoFields[2].isValid" class="help-block mt-1 text-danger"><i class="ft-alert-circle align-middle">{{ customerInfoFields[2].errorMesg ? customerInfoFields[2].errorMesg : "Please enter " + customerInfoFields[2].label }}</i></div>                         
+                    <p>Selected Customer : </p>{{CustomerEmail}}
+                  </div>
+          
+                  <div [class.d-none]="customerInfoFields[0].fieldValue == 'true'">
+                    <app-input [config]="customerInfoFields[3]"></app-input>
+                    <app-input [config]="customerInfoFields[4]"></app-input>
+                    <app-input [config]="customerInfoFields[5]"></app-input>
+                    <mat-checkbox [(ngModel)]="customerInfoFields[6].fieldValue" class="mrgn-r-md"></mat-checkbox>
+                    {{customerInfoFields[6].label}}
+                  </div>
+                </div>
+                <div class="gene-card-title mrgn-t-md">
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                      <div fxLayout="column">
+                          <h4>{{'Billing Information'}}</h4>
+                      </div>
+                      <span fxFlex></span> 
+                    </div>
+                    <mat-divider></mat-divider>
+                </div>
+                <div class="gene-card-content">
+                    <app-input [config]="customerInfoFields[7]"></app-input>
+                    <app-input [config]="customerInfoFields[8]"></app-input>
+                    <app-input [config]="customerInfoFields[9]"></app-input>
+                    <app-input [config]="customerInfoFields[10]"></app-input>
+                    <app-input [config]="customerInfoFields[11]"></app-input>
+                    <app-input [config]="customerInfoFields[12]"></app-input>
+                    <app-input [config]="customerInfoFields[13]"></app-input>
+                    <app-select [config]="customerInfoFields[14]"></app-select>
+                    <app-input [config]="customerInfoFields[15]"></app-input>
+                    <app-input [config]="customerInfoFields[16]"></app-input>
+                    <mat-checkbox [(ngModel)]="customerInfoFields[17].fieldValue" class="mrgn-r-md"></mat-checkbox>
+                    {{customerInfoFields[17].label}}
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start">
+                  <button type="button" class="btn btn-secondary mr-2">Previous</button>
+                  <button type="button" class="btn btn-primary mr-2" (click)="nextStep()">Next</button>
+                </div>
+            </div>
+          </mat-card>
+        </mat-tab>
+        <mat-tab label="Items">
+            <mat-card fxFlex="100%">
+                <div class="gene-card-title mrgn-t-md">
+                  <div fxLayout="row" fxLayoutAlign="start center">
+                    <div fxLayout="column">
+                        <h4>{{'Add Products'}}</h4>
+                    </div>
+                    <span fxFlex></span> 
+                  </div>
+                  <mat-divider></mat-divider>
+              </div>
+              <div class="gene-card-content">
+                  <mat-radio-group [(ngModel)]="itemFields[0].fieldValue" #radioGroup="matRadioGroup">
+                    <mat-radio-button value="true" class="mr-3">{{ itemFields[0].label }}</mat-radio-button>
+                    <mat-radio-button value="false">{{ itemFields[1].label }}</mat-radio-button>
+                  </mat-radio-group>
+          
+                  <div [class.d-none]="itemFields[0].fieldValue == 'false'">
+                    <mat-form-field class="full-wid" [class]="itemFields[2].styleClass">
+                      <input (onchange)="SearchCustomer(itemFields[2].fieldValue)" class="mrgn-t-none" [(ngModel)]="itemFields[2].fieldValue"  matInput [placeholder]="customerInfoFields[2].label" [type]="customerInfoFields[2].type"  [required]="customerInfoFields[2].required">
+                      <span matSuffix><i class="material-icons"></i>{{itemFields[2].iconClass}}</span>     
+                  </mat-form-field>
+                  <div *ngIf="!itemFields[2].isValid" class="help-block mt-1 text-danger"><i class="ft-alert-circle align-middle">{{ itemFields[2].errorMesg ? customerInfoFields[2].errorMesg : "Please enter " + customerInfoFields[2].label }}</i></div>                         
+                    <p>Selected Customer : </p>{{CustomerEmail}}
+                  </div>
+          
+                  <div [class.d-none]="itemFields[0].fieldValue == 'true'">
+                    <app-input [config]="itemFields[3]"></app-input>
+                    <app-input [config]="itemFields[4]"></app-input>
+                    <app-input [config]="itemFields[5]"></app-input>
+                    <mat-checkbox [(ngModel)]="itemFields[6].fieldValue" class="mrgn-r-md"></mat-checkbox>
+                    {{itemFields[6].label}}
+                  </div>
+              </div>
+            </mat-card>
+        </mat-tab>
+        <mat-tab label="Shipping">
+            <mat-card fxFlex="100%">
+             
+                <div class="gene-card-title mrgn-t-md">
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                      <div fxLayout="column">
+                          <h4>{{'Shipping'}}</h4>
+                      </div>
+                      <span fxFlex></span> 
+                    </div>
+                    <mat-divider></mat-divider>
+                </div>
+                <div class="gene-card-content">
+                  <h5>Destination</h5>
+                  <mat-divider></mat-divider>
+                  <mat-radio-group [(ngModel)]="shippingFields[0].fieldValue" #radioGroup="matRadioGroup">
+                    <mat-radio-button value="true" class="mr-3 mt-4">{{ shippingFields[0].label }}</mat-radio-button>
+                    <mat-radio-button value="false" class="mt-4">{{ shippingFields[1].label }}</mat-radio-button>
+                  </mat-radio-group>
+                  <h5 class="mrgn-t-md">Shipping Address</h5>
+                  <mat-divider></mat-divider>
+                    <app-input [config]="shippingFields[7]"></app-input>
+                    <app-input [config]="shippingFields[8]"></app-input>
+                    <app-input [config]="shippingFields[9]"></app-input>
+                    <app-input [config]="shippingFields[10]"></app-input>
+                    <app-input [config]="shippingFields[11]"></app-input>
+                    <app-input [config]="shippingFields[12]"></app-input>
+                    <app-input [config]="shippingFields[13]"></app-input>
+                    <app-select [config]="shippingFields[14]"></app-select>
+                    <app-input [config]="shippingFields[15]"></app-input>
+                    <app-input [config]="shippingFields[16]"></app-input>
+                    <mat-checkbox [(ngModel)]="shippingFields[17].fieldValue" class="mrgn-r-md"></mat-checkbox>
+                    {{shippingFields[17].label}}
+                    <h5 class="mrgn-t-md">Shipping Method</h5>
+                    <mat-divider></mat-divider>
+                </div>
+             
+            </mat-card>
+        </mat-tab>
+        <mat-tab label="Finalize">
+          <mat-card fxFlex="100%">
+              <div class="gene-card-title mrgn-t-md">
+                  <div fxLayout="row" fxLayoutAlign="start center">
+                    <div fxLayout="column">
+                        <h4>{{'Comments and Notes'}}</h4>
+                    </div>
+                    <span fxFlex></span> 
+                  </div>
+                  <mat-divider></mat-divider>
+              </div>
+              <div class="gene-card-content">
+                  <app-input [config]="finalizeFields[0]"></app-input>
+                  <app-input [config]="finalizeFields[1]"></app-input>
+              </div>
+            </mat-card>
+        </mat-tab>
+    </mat-tab-group>
+</div>
+
+<div class="mrgn-b-xl detail-btns">
+  <button type="button" class="btn btn-danger ml-3 mr-2" (click)="CancelClicked()">Cancel</button>
+  <button type="button" class="btn btn-secondary mr-2" disabled (click)="BackClicked()">Back</button>
+  <button type="button" class="btn btn-primary mr-2" (click)="CreateClicked()">Next</button>
+</div>
+</div>
+
+

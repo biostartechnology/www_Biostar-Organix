@@ -1,0 +1,29 @@
+.add-icon-btn{
+    border: none;
+    background: none;
+    padding-left: 1rem;
+    cursor: pointer;
+}
+.mat-tree-node {
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+}
+.chkbox_block{
+    display: flex;
+    width: 25%;
+    align-items: center;
+    padding:0.25rem 0.5rem;
+    border-radius: 6rem;
+}
+.chkbox_block:hover{
+    background-color: #eff6ff;
+}
+.input_block{
+    display: flex;
+    padding-left: 2.6rem;
+}
+
+.chkbox_block[_ngcontent-ng-cli-universal-c312] {
+    width: 27% !important;
+}

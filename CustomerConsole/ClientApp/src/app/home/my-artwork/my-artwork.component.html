@@ -1,0 +1,37 @@
+
+
+<button type="button" class="btn mr-2 btn-danger" (click)="cancelClicked()">
+  <span class="d-flex align-items-center">
+    <i class="ft-x mr-1"></i>
+    <span>Cancel</span>
+  </span>
+</button>
+<div *ngIf="awaitingArtWork.length > 0">
+  <div class="row mt-3 p-2 m-auto artWork align-items-center justify-content-center" *ngFor="let order of awaitingArtWork">
+    <div class="card col-sm-6 col-md-4 col-lg-3 m-2 pt-2 align-items-center" *ngFor="let item of order.ItemsList;let i=index">
+      <img  [src]="item.ArtWorkImgPath" class="card-img-top img" alt="No Image" />
+      <input type="file" accept="pdf/*,image/*" *ngIf="!item.ArtWorkImgPath || !isImageUploaded(item.ArtWorkImgPath)" (change)="imageFileSelected($event,item)" placeholder="Upload Image" />
+      <button class="btn btn-primary" *ngIf="!isImageUploaded(item.ArtWorkImgPath)" (click)="uploadImage(item,order,i)">Upload</button>
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+      </div>
+      <ul class="list-group list-group-flush p-0">
+        <li class="list-group-item">{{item.ProductName}}</li>
+        <li class="list-group-item" *ngIf="(item.WidthInch > 0 || item.WidthFt > 0 ) && (item.HeightFt > 0 || item.HeightInch > 0)">{{item.WidthFt}}' {{item.WidthInch}}" x {{item.HeightFt}}' {{item.HeightInch}}"</li>
+      </ul>
+      <div class="card-body p-0">
+        <a href="#" class="card-link"><mat-icon></mat-icon></a>
+        <a href="#" class="card-link"><mat-icon></mat-icon></a>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="awaitingArtWork.length == 0">
+  <div class="row mt-3 p-2 m-auto artWork align-items-center justify-content-center">
+    <p>Upload and Proof</p>
+    <p>Accepted File Formats: JPG or Single Page PDF</p>
+    <p> Don't Include Crop Marks or Bleed</p>
+    <p>No jobs awaiting artwork upload.</p>
+  </div>
+</div>
+

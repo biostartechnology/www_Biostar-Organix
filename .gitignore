@@ -1,0 +1,22 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/StorageUtility/obj/Debug/netcoreapp3.1
+/CommanModel/obj
+/CommanModel/bin/Debug/netcoreapp3.1
+/StorageUtility/obj
+/StorageUtility/bin/Debug/netcoreapp3.1
+/CommonUtility/obj
+/CommonUtility/bin/Debug/netcoreapp3.1
+/StorageUtility/bin/Release/netcoreapp3.1
+/CommonUtility/bin/Release/netcoreapp3.1
+/CommanModel/bin/Release/netcoreapp3.1
+/AdminConsole/ClientApp/.angular/cache/angular-webpack
+/AdminConsole/ClientApp/.angular/cache/babel-webpack
+/AdminConsole/ClientApp/.angular/cache/13.2.6/angular-webpack
+/AdminConsole/ClientApp/.angular/cache/13.2.6/babel-webpack
+/CustomerConsole/ClientApp/.angular/cache/13.3.0
+/.vs/E-Commerce/config
+/.vs/E-Commerce
+/AdminConsole/ClientApp/.angular/cache/13.3.1

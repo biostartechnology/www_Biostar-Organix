@@ -1,0 +1,164 @@
+
+<div class="page-content" *ngIf="!orderDetailsView">
+  <div class="container-xl d-flex">
+    <div class="mt-4 pt-2 order w-100">
+      <div class="header">
+        <h5>Order Status</h5>
+      </div>
+      <table width="100%" class="table table-hover" cellspacing="0" cellpadding="10">
+        <tbody>
+          <tr class="tabband" style="background:#D4D4D4;">
+            <th width="200">Order#</th>
+            <th width="100">Job ID</th>
+            <th width="100">Preview</th>
+            <th width="50">Qty</th>
+            <th width="100"> Job Name/PO</th>
+            <th width="100">Status</th>
+            <th width="100">Action</th>
+          </tr>
+        </tbody>
+      </table>
+      <div class="order_table" *ngFor="let order of OrdersList">
+        <table width="100%" class="table table-hover" cellspacing="0" cellpadding="10">
+          <tbody>
+            <tr>
+              <td width="200" rowspan="3" colspan="2" class="orderNumCol">
+                <h6>{{order.OrderId}}</h6>
+                <div class="mb-2">{{getDateFormatted(order.OrderedDate)}}</div>
+                <div class="mb-2">
+                  <a (click)="onEdit(order)" class="btn btn-sm btn-outline-secondary">Order Detail</a>
+                </div>
+                <div class="mb-0">${{order.TotalCost}}</div>
+                <div>
+                  <a href="/invoice?id={{order.OrderId}}" style="font-size:12px; text-decoration: none;" target="_blank">
+                    Print Invoice
+                  </a>
+                </div>
+              </td>
+              <ng-template ngFor let-item [ngForOf]="order.ItemsList">
+                <div class="d-table w-100">
+                  <td width="100"> {{item.JobId}}</td>
+                  <td width="100"> <img [src]="sanitize(item.ProductImage)" width="100" /></td>
+                  <td width="50">{{item.OrderCount}}</td>
+                  <td width="100"><div>{{item.JobName}}</div><br /><span class="muted">{{item.Notes ? item.Notes : ""}}</span></td>
+                  <td width="100"><div>{{getOrderStatus(item.OrderStatus)}}</div><br /><span class="muted">{{""}}</span></td>
+                  <td width="100"><button class="btn btn-sm btn-info" (click)="reOderPressed(item)"> Reorder</button></td>
+                </div>
+              </ng-template>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="orderDetailsView">
+  <section id="invoice_print">
+    <div class="container my-5 w-60 px-2" >
+      <div>
+        <button class="btn btn-primary p-1 text-white invoice-btn" (click)="backClicked()" >
+         Back
+        </button>
+        <a href="/invoice?id={{orderDetail.OrderId}}" class="btn btn-success p-1 text-white invoice-btn float-right" target="_blank">
+          Print Invoice
+        </a>
+      </div>
+      <div class="col-md-12 py-3">
+        <div class="d-flex justify-content-between header mb-4">
+          <h5 class="mb-1">Invoice of Order {{orderDetail.Id}}</h5>
+          <p class="d-flex mb-1"><span>{{getDateFormatted(orderDetail.OrderedDate)}}</span></p>
+        </div>
+        <div class="d-flex justify-content-between">
+          <div class="mr-3">
+            <h6>Payment Method</h6>
+            <p>{{orderDetail.PaymentMethod}}</p>
+          </div>
+          <div>
+            <h6>Billing Address</h6>
+            <p>{{orderDetail.ShippingAddress}}</p>
+          </div>
+        </div>
+        <div class="col-md-12 job-table" *ngFor="let item of orderDetail.ItemsList">
+          <div class="tbhead d-flex p-2">
+            <p class="tlabel w-50 m-0">
+              Job Id: {{item.JobId}}
+            </p>
+            <p class="m-0">{{item.ProductTitle}}</p>
+          </div>
+          <div class="d-flex justify-content-between p-2">
+            <div class="col-md-6 w-40">
+              <div class="d-flex">
+                <p class="tlabel">Job Name</p><p>
+                  {{item.JobName}}
+                </p>
+              </div>
+              <div class="d-flex" *ngIf="(item.WidthInch > 0 || item.WidthFt > 0 ) && (item.HeightFt > 0 || item.HeightInch > 0)">
+                <p class="tlabel">Size</p><p>{{item.WidthFt}}' {{item.WidthInch}}" x {{item.HeightFt}}' {{item.HeightInch}}"</p>
+              </div>
+              <div class="d-flex" *ngIf="item.Material">
+                <p class="tlabel">Material</p><p>{{item.Material}}</p>
+              </div>
+              <div class="d-flex">
+                <p class="tlabel">Turnaround</p><p>{{item.TurnAround}}</p>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between w-60 table-right">
+              <p class="w-75 m-auto" *ngIf="item.DeliveryType == 0">Store Pickup</p>
+              <span class="w-75 m-auto" *ngIf="item.DeliveryType == 1">
+                Delivery Address :
+                <p class="d-flex m-0 ml-3" *ngFor="let ad of orderDetail.ShippingAddress.split(',')">
+                  {{ad}}
+                </p>
+              </span>
+              <p class="w-75 m-auto d-flex">{{ad}}<br /></p>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">Qty.</th>
+                    <th scope="col">Unit Price</th>
+                    <th scope="col">Sub-Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">{{item.OrderCount}}</th>
+                    <td>${{item.UnitPrice}}</td>
+                    <td>${{item.OrderCount * item.UnitPrice}}</td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" class="text-center">Job-Total</td>
+                    <td>
+                      ${{item.TotalCost}}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="p-2 tbhead mt-3">
+          <table width='100%' cellspacing="0" cellpadding="4" class='order_total'>
+            <tr>
+              <td align='right'>Sub-Total:</td>
+              <td align='right' width='60'>${{orderDetail.TotalCost - ShippingCost}}</td>
+            </tr>
+            <tr>
+              <td align='right'>Shipping:</td>
+              <td align='right' width='60'>${{ShippingCost}}</td>
+            </tr>
+            <tr>
+              <td align='right'></td>
+              <td align='right' width='60'></td>
+            </tr>
+            <tr>
+              <td align='right'>Total:</td>
+              <td align='right' width='60'>${{orderDetail.TotalCost}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>

@@ -1,0 +1,118 @@
+<section id="invoice_print">
+  <div class="container my-5 w-60 px-2" *ngIf="!invoiceNA">
+    <div class="col-md-12 py-3">
+      <div class="d-flex justify-content-between mb-4">
+        <div class="la-brand pull-left">
+          <img src="/assets/lasigns_trademark_pdf.jpg" style="width:180px;height:35px;" />
+        </div>
+        <button class="btn btn-success p-1 text-white invoice-btn" (click)="PrintClicked()">Print Invoice</button>
+      </div>
+      <div class="d-flex justify-content-between header mb-4">
+        <h5 class="mb-1">Invoice of Order {{orderData.Id}}</h5>
+        <p class="d-flex mb-1"><span>{{getDate(orderData.OrderedDate)}}</span></p>
+      </div>
+      <div class="d-flex justify-content-between">
+        <div class="mr-3">
+          <h6>Payment Method</h6>
+          <p>{{orderData.PaymentMethod}}</p>
+        </div>
+        <div>
+          <h6>Billing Address</h6>
+          <p>{{orderData.ShippingAddress}}</p>
+        </div>
+      </div>
+      <div class="col-md-12 job-table" *ngFor="let item of orderData.ItemsList">
+        <div class="tbhead d-flex p-2">
+          <p class="tlabel w-50 m-0">
+            Job Id: {{item.JobId}}
+          </p>
+          <p class="m-0">{{item.ProductTitle}}</p>
+        </div>
+        <div class="d-flex justify-content-between p-2">
+          <div class="col-md-6 w-40">
+            <div class="d-flex">
+              <p class="tlabel">Job Name</p><p>
+                {{item.JobName}}
+              </p>
+            </div>
+            <div class="d-flex" *ngIf="(item.WidthInch > 0 || item.WidthFt > 0 ) && (item.HeightFt > 0 || item.HeightInch > 0)">
+              <p class="tlabel">Size</p><p>{{item.WidthFt}}' {{item.WidthInch}}" x {{item.HeightFt}}' {{item.HeightInch}}"</p>
+            </div>
+            <div class="d-flex" *ngIf="item.Material">
+              <p class="tlabel">Material</p><p>{{item.Material}}</p>
+            </div>
+            <div class="d-flex">
+              <p class="tlabel">Turnaround</p><p>{{item.TurnAround}}</p>
+            </div>
+            <!--<div class="d-flex" *ngIf="item.Material">
+              <p class="tlabel">Hardware</p><p>Stand + Insert</p>
+            </div>-->
+          </div>
+          <div class="d-flex justify-content-between w-60 table-right">
+            <p class="w-75 m-auto" *ngIf="item.DeliveryType == 0">Store Pickup</p>
+            <p class="w-75 m-auto" *ngIf="item.DeliveryType == 0">Store Pickup</p>
+            <span class="w-75 m-auto" *ngIf="item.DeliveryType == 1">
+              Delivery Address :
+              <p class="d-flex m-0 ml-3" *ngFor="let ad of orderData.ShippingAddress.split(',')">
+                {{ad}}
+              </p>
+            </span>
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">Qty.</th>
+                  <th scope="col">Unit Price</th>
+                  <th scope="col">Sub-Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">{{item.OrderCount}}</th>
+                  <td>${{item.UnitPrice}}</td>
+                  <td>${{item.OrderCount * item.UnitPrice}}</td>
+                </tr>
+                <tr>
+                  <td colspan="2" class="text-center">Job-Total</td>
+                  <td>
+                    ${{item.TotalCost}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="p-2 tbhead mt-3">
+        <table width='100%' cellspacing="0" cellpadding="4" class='order_total'>
+          <tr>
+            <td align='right'>Sub-Total:</td>
+            <td align='right' width='60'>${{orderData.TotalCost - ShippingCost}}</td>
+          </tr>
+          <tr>
+            <td align='right'>Shipping:</td>
+            <td align='right' width='60'>${{ShippingCost}}</td>
+          </tr>
+          <tr>
+            <td align='right'></td>
+            <td align='right' width='60'></td>
+          </tr>
+          <tr>
+            <td align='right'>Total:</td>
+            <td align='right' width='60'>${{orderData.TotalCost}}</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="my-3">
+        <h5>Payment History</h5>
+        <div class="d-flex justify-content-between mt-4 history">
+          <p>Receive payment: <span>${{orderData.TotalCost}} </span>(Order Payment)</p>
+          <p>({{getDate(orderData.OrderedDate)}})</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="invoiceNA">
+    Invoice Not Available.
+  </div>
+</section>

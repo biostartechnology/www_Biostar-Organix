@@ -1,0 +1,21 @@
+
+<div class="d-flex" #myElem>
+  <h5>{{config.categoryTitle}}</h5>
+</div>
+<div class="mk_grid_view row">
+  <div class="product-card col-" *ngFor="let product of config.data; let i=index;" [ngClass]="config.cssClass" (click)="onClick(product)">
+    <div class="prod-title">
+      {{product.ProductName}}
+    </div>
+    <div class="prod-info">
+      <div class="info" [innerHTML]="product.shorttdiscription | sanitizeHtml">
+      </div>
+      <div class="img">
+        <img *ngIf="product.ImagesUrls[0]" class="prod_img w-100" [src]="sanitize(product.ImagesUrls[0].Path)"
+             onerror="this.src='./assets/img/noImg_placeholder.jpeg';this.onerror='';" alt="">
+        <img *ngIf="!product.ImagesUrls[0]" class="prod_img w-100" src="./assets/img/noImg_placeholder.jpeg" alt="">
+      </div>
+    </div>
+  
+  </div>
+</div>

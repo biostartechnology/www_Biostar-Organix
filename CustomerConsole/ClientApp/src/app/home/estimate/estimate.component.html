@@ -1,0 +1,75 @@
+
+<section class="container">
+  <div class="col-md-12 mt-4">
+    xyz
+    xyz
+    <mdb-tabs>
+      <h3>Estimate</h3>
+      <mdb-tab title="New Estimate">
+        <div class="query px-3 py-1">
+          <h6>Should I place an estimate?</h6>
+          <p>If your order does not meet these criteria, please use the Instant Quote system located on each product page for your convenience.</p>
+          <ol>
+            <li>You order contains 50+ sheets of rigid substrates, 1000+ square feet of banner material, or 500+ square feet of another material.</li>
+            <li>You’re ordering a quantity of at least 100 of any item.</li>
+            <li>Your order exceeds $250 and you have a special finishing request.</li>
+          </ol>
+          <p>Please make sure you meet one of the following criteria, before placing your estimate request:</p>
+        </div>
+        <div class="estimate-form mt-4 col-md-12">
+          <div class="py-3">
+            <div class="row my-2">
+              <label class="Label mr-2">Project Name:</label>
+              <input class="col-md-3" type="text" name="projectName"/>
+            </div>
+            <div class="row my-2">
+              <label class="Label mr-2">Quantity:</label>
+              <input class="col-md-3 mr-2" type="text" name="projectName" />
+              <button class="col-md-3">More Quantity Choises</button>
+            </div>
+            <div class="row my-2">
+              <label class="Label mr-2">Number of Artworks:</label>
+              <input class="col-md-3" type="text" name="projectName"/>
+            </div>
+            <div class="row my-2 py-2 categoryOption">
+              <label class="Label mr-2">Product:</label>
+              <select class="col-md-3 mr-2" [(ngModel)]="selectedProductCat" (change)="categorySelected($event)">
+                <option *ngFor="let flag of category" [value]="flag.id">{{flag.name}}</option>
+              </select>
+              <select class="col-md-3 mr-2" [(ngModel)]="selectedProduct">
+                <option *ngFor="let flag of productCatSpecificFields[selectedProductCat]" [value]="flag.id">{{flag.name}}</option>
+              </select>
+            </div>
+            <div class="hidden d-none">
+              <div class="row m-2">
+                <label class="Label mr-2">Additional Quantity:</label>
+                <input class="col-md-3" type="text" name="aditionalQty" />
+              </div>
+              <div class="row m-2">
+                <label class="Label mr-2">Additional Quantity:</label>
+                <input class="col-md-3" type="text" name="aditionalQty"/>
+              </div>
+            </div>
+            <div class="product-properties">
+              <div class="row my-2" *ngFor="let prod of productCatSpecificFields[selectedProductCat][selectedProduct].children">
+                <label class="Label mr-2">{{prod.label}}</label>
+                <select class="col-md-3" >
+                  <option *ngFor="let option of prod.options" [value]="option.id">{{option.name}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="row my-2">
+              <label class="Label mr-2">Special Instruction:</label>
+              <textarea name="message" cols="30" rows="4" placeholder="Your message"></textarea>
+            </div>
+          </div>
+          </div>
+      </mdb-tab>
+
+      <mdb-tab title="Recent Estimate">
+        @nd Tab
+
+      </mdb-tab>
+    </mdb-tabs>
+  </div>
+</section>

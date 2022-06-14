@@ -1,0 +1,25 @@
+<div class="width-100 d-flex flex-column">
+    <app-table *ngIf="!pluginDetailsView" (onAnyAction)="onAnyAction($event)" (addClick)="addPluginClick($event)" (deleteClick)="deletePluginClicked($event)" (reloadData)="getDatFromServer($event)" [config]="PluginTableConfig"></app-table>
+  
+    <div class="content-box"  *ngIf="pluginDetailsView">
+      <div id="basicInfo" class="mat-card">
+        <div class="gene-card-title">
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <h4>{{'Plugins'}}</h4>
+          </div>
+        </div>
+        <div class="gene-card-content">
+          <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+            <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100">
+              <app-input *ngFor="let f of pluginField" [config]="f"></app-input>
+            </div>
+          </div>
+        </div>
+        <div class="action-bar">
+          <button type="button" class="btn btn-danger mr-2 float-right" (click)="CancelClicked()">Cancel</button>
+          <button type="button" class="btn btn-primary mr-2 float-right" (click)="CreateClicked()">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

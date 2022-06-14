@@ -1,0 +1,176 @@
+<div fxLayout="row wrap" fxLayoutAlign="space-between" class="listView_toolBar"
+   *ngIf="config && config.tableToolbar==true">
+   <div fxLayout="row wrap" fxLayoutAlign="start center" fxflex="70" fxflex.xs="100" fxflex.sm="100" fxflex.md="50" fxflex.lg="70">
+         <button type="button" class="btn btn-primary mr-2" (click)="addNewRow()">ADD</button>
+         <button type="button" class="btn btn-danger" (click)="onDeleteClick()">Delete</button>
+     
+   </div>
+   <div fxLayoutAlign="start center" fxflex="30" fxflex.xs="100" fxflex.sm="100" fxflex.md="50" fxflex.lg="30"
+      *ngIf="config.EnableSearch == true">
+      <mat-form-field>
+         <input [(ngModel)]="searchVal" matInput placeholder="Search Here">
+      </mat-form-field>
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="tableRefresh()">
+         <mat-icon>search</mat-icon>
+      </button>
+      <!--<div class="product-icon">
+         <mat-card class="switcher-wrap pad-x-xs pad-y-xs" fxLayoutAlign="space-between stretch">
+            <i class="material-icons inline-block grid-icon" id="grid" (click)="productShowType('grid')"
+               [class.active]="showType=='grid'" title="Card View">apps</i>
+            <mat-divider [vertical]="true"></mat-divider>
+            <i class="material-icons inline-block mrgn-r-none mrgn-l-xs list-icon active" id="list"
+               (click)="productShowType('list')" [class.active]="showType=='list'" title="List View">list</i>
+         </mat-card>
+      </div>-->
+      <div class="mrgn-r-sm">
+         <mat-icon class="mat-icon-grey cursor-pointer" (click)="tableRefresh()">loop</mat-icon>
+      </div>
+   </div>
+</div>
+<mat-divider></mat-divider>
+<div fxLayout="row wrap table_view" fxLayoutAlign="start stretch" *ngIf="showType == 'list'">
+  <div class="table-responsive" [style.height]="height">
+    <table class="mat-table table-hover table-fixed  cdk-table full-wid" role="grid">
+      <thead role="rowgroup">
+        <tr role="row" class="mat-header-row cdk-header-row">
+          <th *ngFor="let columnHeader of config.columns" (click)="onSort(columnHeader)"
+              [ngSwitch]="columnHeader.type" role="columnheader" class="mat-header-cell cdk-header-cell">
+            <div *ngSwitchCase="'checkbox'">
+              <mat-checkbox [(ngModel)]="allCheck" (change)="checkAll(columnHeader)">
+              </mat-checkbox>
+            </div>
+            <div *ngSwitchDefault>
+              {{columnHeader.name}}
+              <span [class.sort-asc-icn]="columnHeader.sortOrder == 1"
+                    [class.sort-desc-icn]="columnHeader.sortOrder == -1"
+                    [class.ascdesc-sort-icn]="!columnHeader.sortOrder && columnHeader.sortable"></span>
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody role="rowgroup" *ngIf="config.data && config.data.length > 0">
+        <tr role="row" class="mat-row cdk-row " *ngFor="let row of config.data;let i=index" (click)="selectRow(i,row)" [class.rowDiv]="row.isHtml" [class.selected]="i==selectedRowId">
+          <td *ngIf="row.isHtml" colspan="8" [innerHtml]="row.value"></td>
+          <ng-container *ngIf="!row.isHtml">
+            <td *ngFor="let columnHeader of config.columns;" class="mat-cell cdk-cell"
+                [ngSwitch]="columnHeader.type">
+
+              <div *ngSwitchCase="'string'" class="make-ellipse">
+                <mat-icon *ngIf="columnHeader.showSubRowIcon && row.childRow">
+                  subdirectory_arrow_right
+                </mat-icon>
+                {{row[columnHeader.id]}}
+              </div>
+
+
+              <div *ngSwitchCase="'Date'" class="make-ellipse">
+                {{getDateFormatted(row[columnHeader.id])}}
+              </div>
+
+              
+
+              <div *ngSwitchCase="'progress-bar'" class="progress">
+                <div class="progress-bar" [ngClass]="columnHeader.ariaType" role="progressbar"
+                     style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+
+              <label *ngSwitchCase="'tag-list'" class="badge badge-info">{{row[columnHeader.id]}}</label>
+
+              <div *ngSwitchCase="'checkbox'">
+                <mat-checkbox (change)="checkedRow(row,i,columnHeader)" [(ngModel)]="row[columnHeader.id]"
+                              (click)="$event.stopPropagation()" [checked]="false">
+                </mat-checkbox>
+              </div>
+
+              <img *ngSwitchCase="'image'" class="img-circle" [src]="sanitize(row[columnHeader.id])" onerror="this.src='./assets/img/noImg_placeholder.jpeg';this.onerror='';" height="50"
+                   width="50">
+
+              <div *ngSwitchCase="'button'">
+                <button mat-icon-button (click)="colButtonClick(row, columnHeader,i,'button')">
+                  <mat-icon [ngClass]="row[columnHeader.id] == columnHeader.compareVal ? columnHeader.activeClass : ''">
+                    {{ columnHeader.usedefaultIcon ? columnHeader.iconClass : row[columnHeader.id] }}
+                  </mat-icon>
+                </button>
+              </div>
+
+              <div *ngSwitchCase="'select'">
+                <span *ngIf="columnHeader.displayColor" class="order-status" [style.background-color]="row[columnHeader.displayColorId]"></span>
+                <mat-form-field class="w-70">
+                  <mat-select (selectionChange)="colButtonClick(row, columnHeader, i,'select')" [(ngModel)]="row[columnHeader.id]">
+                    <mat-option *ngFor="let option of columnHeader.options" [value]="option.value" [attr.selected]="option.value == row[columnHeader.id]">{{option.label}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div *ngSwitchCase="'input'">
+                <mat-form-field class="full-wid">
+                  <input class="mrgn-t-none" (change)="colButtonClick(row, columnHeader,i,'input')" [(ngModel)]="row[columnHeader.id]" matInput [type]="columnHeader.subType">
+                  <span matSuffix *ngIf="row[columnHeader.id] && row[columnHeader.id].iconClass"><i class="material-icons"></i>{{row[columnHeader.id].iconClass}}</span>
+                </mat-form-field>
+              </div>
+
+              <div *ngSwitchCase="'action'">
+                <button (click)="setActionRow(row, columnHeader,i)" mat-icon-button [matMenuTriggerFor]="menu">
+                  <mat-icon class="mat-icon-grey gene-text-xl">more_vert</mat-icon>
+                </button>
+              </div>
+
+            </td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="!config.data || config.data.length == 0" style="text-align:center;padding:10px">No Data Available</div>
+  </div>
+   <div class="pagination" *ngIf="config.enablePagination">
+      <mat-paginator (page)="onPageChange($event)" [length]="config.totalRows" [pageSize]="config.currentPageSize"
+         [pageSizeOptions]="[20, 50, 100]">
+      </mat-paginator>
+   </div>
+</div>
+<!--<div fxLayout="row wrap" fxLayoutAlign="start stretch" class="grid_view" *ngIf="showType == 'grid'">
+   <div fxFlex.gt-md="25" fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100"
+      *ngFor="let product of config.data; let i=index;">
+      <mat-card class="product-card">
+         <a class="p-link">
+            <img width="626" height="800" mat-card-image class="prod_img" [src]="product.image_url"
+               onerror="this.src='./assets/img/noImg_placeholder.jpeg';this.onerror='';" alt="Photo of a Shiba Inu">
+         </a>
+         <div class="wishlist-icon">
+            <a (click)="deleteProduct(i)">
+               <mat-icon> delete </mat-icon>
+            </a>
+         </div>-->
+         <!-- wishlist-icon-->
+         <!--<div class="m-icon">
+            <button class="success-bg" mat-fab (click)="onEditProduct(product)"><i
+                  class="material-icons">edit</i></button>
+         </div>-->
+         <!-- m-icon -->
+         <!--<mat-card-content class="product-content relative">
+            <p class="category-wrap">{{product.itemID}}</p>
+            <h5 class="tit_ellipsis"><a class="title-link">{{product.itemName}}</a> </h5>
+            <div class="product-price">
+               <div fxFlex fxLayoutAlign="start">
+                  <del class="text-line">{{product.specialPrice1}}</del>
+                  <span class="success-text font-bold">{{product.specialPrice}}</span>
+               </div>
+            </div>
+         </mat-card-content>
+      </mat-card>
+   </div>
+</div>-->
+<mat-menu #menu="matMenu" x-position="before">
+  <button (click)="actionBtnClick('viewDetails')" mat-menu-item>
+    <mat-icon>more</mat-icon>
+    View
+  </button>
+  <!--<button (click)="actionBtnClick('editRow')" mat-menu-item>
+     <mat-icon>edit</mat-icon>
+     Edit
+  </button>-->
+  <!--<button (click)="actionBtnClick('deleteRow')" mat-menu-item>
+     <mat-icon>delete</mat-icon>
+     Delete
+  </button>-->
+</mat-menu>

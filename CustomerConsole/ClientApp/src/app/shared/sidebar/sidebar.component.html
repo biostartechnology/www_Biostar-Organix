@@ -1,0 +1,147 @@
+
+<!-- MENU-AREA -->
+<div class="menu-area bg-dark">
+ 
+      <div class="row">
+          <div class="col-md-2 col-sm-2 col-xs-12 pr-0">
+              <div class="categories">
+                  <ul id="nav">
+                      <li><b style="letter-spacing: 1px;">Categories</b> <mat-icon class="menu_icon" (click)="toggleOffSidebar()">menu</mat-icon>
+                          <ul class="parent" *ngIf="sidebarOpened">
+                              <li *ngFor="let tab of ProductDetailsTab">
+                                  <h6 class="">{{tab.name}}</h6>
+                                  <ul class="child">
+                                    <li *ngFor="let subTab of tab.children"  [class.selected]="selectedTab == subTab.id" (click)="navigateToSection(subTab)">
+                                      <a>{{subTab.name}}</a>
+                                    </li>
+                                  </ul>
+                                </li>
+                              
+                          </ul>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-12 p-0">
+              <nav class="main-menu">
+                  <ul id="navigation">
+                      <li class="active" *ngFor="let tab of ProductDetailsTab"><a class="d-flex align-items-center">{{tab.name}} <mat-icon>arrow_drop_down</mat-icon></a>
+                          <ul class="drop_nav">
+                              <li *ngFor="let subTab of tab.children" [class.selected]="selectedTab == subTab.id" (click)="navigateToSection(subTab)"> 
+                                <a>{{subTab.name}}</a></li>
+                          </ul>
+                      </li>
+                      <li><a>Downloads</a>
+                      </li>
+                      <li><a>Help Center</a></li>
+                  </ul>
+              </nav>
+              
+              <!-- Mobile Navigation -->
+              <div class="only-for-mobile">
+                  <div class="col-xs-12">
+                      <ul class="ofm">
+                          <li class="m_nav"><i class="fa fa-bars"></i> Navigation</li>
+                      </ul>
+
+                      <!-- MOBILE MENU -->
+                      <div class="mobi-menu">
+                          <div id='cssmenu'>
+                              <ul>
+                                  <li class='has-sub'>
+                                      <a href='index.html'><span>Home</span></a>
+                                      <ul class="sub-nav">
+                                          <li><a href="homepage_02.html"><span>Home version 2</span></a></li>
+                                          <li><a href="homepage_03.html"><span>Home version 3</span></a></li>
+                                      </ul>
+                                  </li>
+                                  <li class='has-sub'>
+                                      <a href='#'><span>Pages</span></a>
+                                      <ul class="sub-nav">
+                                          <li><a href="blog.html">Blog</a></li>
+                                          <li><a href="checkout.html">Checkout</a></li>
+                                          <li><a href="product-list.html">Product list</a></li>
+                                          <li><a href="profile.html">Profile</a></li>
+                                          <li><a href="search-result.html">Search result</a></li>
+                                          <li><a href="single-product.html">Single product</a></li>
+                                          <li><a href="wishlist.html">wishlist</a></li>
+                                          <li><a href="404.html">404</a></li>
+                                      </ul>
+                                  </li>
+                                  <li>
+                                      <a href='about-us.html'><span>About Us</span></a>
+                                  </li>
+                                  <li>
+                                      <a href='product-list.html'><span>Men</span></a>
+                                  </li>
+                                  <li>
+                                      <a href='product-list.html'><span>Women</span></a>
+                                  </li>
+                                  <li>
+                                      <a href='https://www.nlshelp.com/session/nls'><span>Contact Us</span></a>
+                                  </li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12 pl-0">
+            <ul class="account">
+              <li> 
+                <a class="btn btn-link btn-sm" [routerLink]="['/Profile']"><mat-icon>account_circle</mat-icon> &nbsp; Profile</a>
+              </li>
+              <li [routerLink]="['/home/cart']"> 
+                  <a class="btn btn-link btn-sm" ><mat-icon>shopping_cart</mat-icon> &nbsp; Shopping</a>
+              </li>
+              <li> 
+                <a class="btn btn-link btn-sm"  href='https://www.nlshelp.com/session/nls'><mat-icon>contact_support</mat-icon> &nbsp; Contatct Us</a>
+              </li>
+            </ul>
+          </div>
+      </div>
+  
+</div>
+<!-- MENU-AREA:END -->
+
+<!-- 
+
+<div class="sidebar expanded">
+  <ul>
+    <ul class="sidebar-items" *ngIf="SidebarIcon" (click)="toggleOffSidebar()">
+      <li class="item text-white bg-dark">
+        <div class="d-flex justify-content-between w-100">
+          <div class="d-flex align-items-center">
+            <mat-icon class="menu_icon">account_circle</mat-icon>
+            <a *ngIf="!loggedIn" class="btn btn-link" [routerLink]="['/session/login']">Hi, Login / Signup</a>
+            <a *ngIf="loggedIn" class="text-white btn-sm"> Hi, Welcome {{accountHolderName}}!</a>
+          </div>
+          <mat-icon>clear</mat-icon>
+        </div>
+      </li>
+      <li *ngIf="loggedIn" class="item text-white bg-dark">
+        <div class="d-flex justify-content-between w-100">
+          <div class="d-flex align-items-center">
+            <button class="btn btn-outline-light btn-sm" [routerLink]="['/home/product']">Home</button>
+          </div>
+          <div class="d-flex align-items-center">
+            <button class="btn btn-outline-light btn-sm" [routerLink]="['/home/account']">Account</button>
+          </div>
+          <div class="d-flex align-items-center">
+            <button class="btn btn-outline-light btn-sm" (click)="logout();">Signout</button>
+          </div>
+          <a href="tel:1(888)739-8501" onclick="ga('send', 'event', 'Phone Click Tracking', 'Click to Call', '1(888)739-8501', 0);">
+            <mat-icon>phone</mat-icon>
+        </a>
+        </div>
+      </li>
+    </ul>
+    <li *ngFor="let tab of ProductDetailsTab">
+      <h6 class="head"><mat-icon class="sidebar-icon">arrow_drop_down</mat-icon> {{tab.name}}</h6>
+      <ul class="sidebar-items">
+        <li *ngFor="let subTab of tab.children" class="item" [class.selected]="selectedTab == subTab.id" (click)="navigateToSection(subTab)">
+          <div class="d-flex align-items-center"> <span [innerHtml]="subTab.name[0]" class="icon"></span><span>{{subTab.name}}</span></div> <mat-icon *ngIf="selectedTab == subTab.id">keyboard_arrow_right</mat-icon>
+        </li>
+      </ul>
+    </li> </ul>
+</div> -->
